@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('favorites', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id') // team_id というカラムを作成する
+                ->nullable() // 外部キーにnull を設定できるようにする
+                ->constrained('userss');
+            $table->foreignId('product_id') // team_id というカラムを作成する
+                ->nullable() // 外部キーにnull を設定できるようにする
+                ->constrained('products');
+            $table->datetime('created_at');
+            $table->datetime('updated_at');    
             $table->timestamps();
         });
     }
