@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->int('price');
+            $table->integer('price');
             $table->varchar(255)('image_path');
             $table->text('description');
-            $table->int('stock');
+            $table->integer('stock');
             $table->foreignId('category_id')
                 ->nullable()
                 ->constrained('categories');
-            $table->int('created_at');
-            $table->int('updated_at');
+            $table->integer('created_at');
+            $table->integer('updated_at');
             $table->timestamps();
         });
     }
