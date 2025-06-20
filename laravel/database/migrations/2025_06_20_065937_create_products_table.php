@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('price');
-            $table->varchar(255)('image_path');
+            $table->string('image_path');
             $table->text('description');
             $table->integer('stock');
             $table->foreignId('category_id')
