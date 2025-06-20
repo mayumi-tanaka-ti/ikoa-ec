@@ -17,14 +17,14 @@ return new class extends Migration
                 ->nullable()
                 ->constrained('users');
             $table->datetime('order_date');
-            $table->varchar(20)('status');
+            $table->string('status');
             $table->integer('total_price');
-            $table->varchar(225)('shipping_address');
-            $table->varchar(20)('shipping_postal_code');
-            $table->varchar(255)('recipient_name');
-            $table->varchar(20)('recipient_phone');
-            $table->varvhar(50)('payment_method');
-            $table->varchar(20)('payment_status');
+            $table->string('shipping_address');
+            $table->string('shipping_postal_code');
+            $table->string('recipient_name');
+            $table->string('recipient_phone');
+            $table->string('payment_method');
+            $table->string('payment_status');
             $table->timestamps();
         });
     }
