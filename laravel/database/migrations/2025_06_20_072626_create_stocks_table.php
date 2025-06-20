@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id') // team_id というカラムを作成する
+                ->nullable() // 外部キーにnull を設定できるようにする
+                ->constrained('products'); 
+            $table->integer('change_quantity');
+            $table->integer('stock_quantity');
+            $table->datetime('created_at');
+            $table->datetime('updated_at');
             $table->timestamps();
         });
     }

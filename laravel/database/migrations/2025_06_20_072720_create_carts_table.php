@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id') // team_id というカラムを作成する
+                  ->nullable() // 外部キーにnull を設定できるようにする
+                  ->constrained('users'); 
             $table->timestamps();
         });
     }
