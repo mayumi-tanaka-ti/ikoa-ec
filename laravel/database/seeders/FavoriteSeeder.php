@@ -16,11 +16,11 @@ class FavoriteSeeder extends Seeder
          DB::table('favorites')->insert([
             [
                 'user_id' => 3,
-                'product_id' => 4,
+                'product_id' => 1,
             ],
             [
                 'user_id' => 4,
-                'product_id' => 5,
+                'product_id' => 2,
             ],
         ]);
     }

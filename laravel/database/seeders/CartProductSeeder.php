@@ -16,19 +16,19 @@ class CartProductSeeder extends Seeder
          DB::table('cart_product')->insert([
             [
                 'cart_id' => 1,
-                'product_id' => 4, // ソファ商品ID例
+                'product_id' => 1, // ソファ商品ID例
                 'quantity' => 1,
                 'amount_price' => 79800,
             ],
              [
                 'cart_id' => 1,
-                'product_id' => 6,       // ラグの商品ID例
+                'product_id' => 3,       // ラグの商品ID例
                 'quantity' => 1,
                 'amount_price' => 2999,
             ],
             [
                 'cart_id' => 2,
-                'product_id' => 5,       // ベッドの商品ID例
+                'product_id' => 2,       // ベッドの商品ID例
                 'quantity' => 1,
                 'amount_price' => 39900,
             ],

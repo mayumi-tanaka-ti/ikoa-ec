@@ -17,6 +17,7 @@ return new class extends Migration
                 ->nullable() // 外部キーにnull を設定できるようにする
                 ->constrained('products'); 
             $table->integer('change_quantity');
+            $table->text('reason');
             $table->integer('stock_quantity');
             $table->timestamps();
         });
