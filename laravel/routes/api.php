@@ -1,6 +1,6 @@
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\Api\Admin\ProductController;
 
 Route::post('/register', [AuthController::class, 'register']);   // ★任意
 Route::post('/login',    [AuthController::class, 'login'])->name('api.login');
