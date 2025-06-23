@@ -19,11 +19,18 @@ class Product extends Model
     
  
 
-     public function users()      // N:N
+     public function favorite_users()      // N:N
     {
         // 中間テーブルの外部キー以外の列を取得するには
         // withPivotで設定必要
-        return $this->belongsToMany(User::class)
+        return $this->belongsToMany(User::class,'favorites');
+    }
+     
+     public function review_users()      // N:N
+    {
+        // 中間テーブルの外部キー以外の列を取得するには
+        // withPivotで設定必要
+        return $this->belongsToMany(User::class,'reviews')
             ->withPivot('rating', 'comment','reviewdate');
     }
 
@@ -42,4 +49,15 @@ class Product extends Model
         return $this->belongsToMany(Order::class)
             ->withPivot('quantity','price');
     }
+
+     public function category()      // 1:N
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+     public function stocks()      // 1:N
+    {
+        return $this->hasMany(Stock::class);
+    }
+
 }

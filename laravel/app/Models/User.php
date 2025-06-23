@@ -63,11 +63,18 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-         public function products()      // N:N
+     public function favorite_products()      // N:N
     {
         // 中間テーブルの外部キー以外の列を取得するには
         // withPivotで設定必要
-        return $this->belongsToMany(Product::class)
+        return $this->belongsToMany(Product::class,'favorites');
+    }
+     
+     public function review_products()      // N:N
+    {
+        // 中間テーブルの外部キー以外の列を取得するには
+        // withPivotで設定必要
+        return $this->belongsToMany(Product::class,'reviews')
             ->withPivot('rating', 'comment','reviewdate');
     }
 }
