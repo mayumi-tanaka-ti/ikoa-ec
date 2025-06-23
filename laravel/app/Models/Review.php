@@ -14,4 +14,6 @@ class Review extends Model
                            'rating',
                            'comment',
                            'review_date'];
+        // $tableで設定する (中間テーブルの名前を変える場合などに使う)
+    protected $table = ['reviews'];
 }
