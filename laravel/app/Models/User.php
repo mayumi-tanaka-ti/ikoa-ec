@@ -53,4 +53,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+        public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class);
+    }
+
+     public function orders()      // 1:N
+    {
+        return $this->hasMany(Order::class);
+    }
+
+         public function products()      // N:N
+    {
+        // 中間テーブルの外部キー以外の列を取得するには
+        // withPivotで設定必要
+        return $this->belongsToMany(Product::class)
+            ->withPivot('rating', 'comment','reviewdate');
+    }
 }
