@@ -21,8 +21,6 @@ return new class extends Migration
             $table->foreignId('category_id')
                 ->nullable()
                 ->constrained('categories');
-            $table->integer('created_at');
-            $table->integer('updated_at');
             $table->timestamps();
         });
     }

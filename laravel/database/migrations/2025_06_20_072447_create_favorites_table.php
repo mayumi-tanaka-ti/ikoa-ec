@@ -18,9 +18,7 @@ return new class extends Migration
                 ->constrained('userss');
             $table->foreignId('product_id') // team_id というカラムを作成する
                 ->nullable() // 外部キーにnull を設定できるようにする
-                ->constrained('products');
-            $table->datetime('created_at');
-            $table->datetime('updated_at');    
+                ->constrained('products'); 
             $table->timestamps();
         });
     }
