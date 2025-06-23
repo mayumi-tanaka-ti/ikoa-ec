@@ -53,6 +53,16 @@ class User extends Authenticatable
         ];
     }
 
+        public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class);
+    }
+
+     public function orders()      // 1:N
+    {
+        return $this->hasMany(Order::class);
+    }
+
          public function products()      // N:N
     {
         // 中間テーブルの外部キー以外の列を取得するには

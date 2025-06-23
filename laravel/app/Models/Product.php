@@ -27,4 +27,19 @@ class Product extends Model
             ->withPivot('rating', 'comment','reviewdate');
     }
 
+     public function carts()      // N:N
+    {
+        // 中間テーブルの外部キー以外の列を取得するには
+        // withPivotで設定必要
+        return $this->belongsToMany(Cart::class)
+            ->withPivot('quantity','amount_price');
+    }
+     
+     public function orders()      // N:N
+    {
+        // 中間テーブルの外部キー以外の列を取得するには
+        // withPivotで設定必要
+        return $this->belongsToMany(Order::class)
+            ->withPivot('quantity','price');
+    }
 }
