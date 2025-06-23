@@ -18,8 +18,6 @@ return new class extends Migration
                 ->constrained('products'); 
             $table->integer('change_quantity');
             $table->integer('stock_quantity');
-            $table->datetime('created_at');
-            $table->datetime('updated_at');
             $table->timestamps();
         });
     }
