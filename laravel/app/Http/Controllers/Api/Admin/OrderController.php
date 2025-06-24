@@ -11,6 +11,7 @@ class OrderController extends Controller
 {
     public function index()
     {
+
         // 注文と注文商品をまとめて取得
         $orders = Order::with('order_products.product')->get();
         return response()->json($orders);
