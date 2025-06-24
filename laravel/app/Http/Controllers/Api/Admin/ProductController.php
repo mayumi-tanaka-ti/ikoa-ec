@@ -29,15 +29,15 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 画像バリデーション
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 画像バリデーション
             'description' => 'nullable|string',
             'stock' => 'required|integer',
             'category_id' => 'required|exists:categories,id',
         ]);
 
         // 画像ファイルがアップロードされた場合の処理
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('products', 'public');
             $validated['image_path'] = $imagePath;
         }
 
@@ -60,14 +60,14 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'sometimes|required|string|max:255',
             'price' => 'sometimes|required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'stock' => 'sometimes|required|integer',
             'category_id' => 'sometimes|required|exists:categories,id',
         ]);
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('products', 'public');
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('products', 'public');
             $validated['image_path'] = $imagePath;
         }
 
