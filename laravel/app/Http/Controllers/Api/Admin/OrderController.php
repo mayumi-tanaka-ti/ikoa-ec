@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
-
+use App\Models\OrderProduct;
 
 class OrderController extends Controller
 {
@@ -18,22 +18,6 @@ class OrderController extends Controller
         $orders = Order::with('order_products.product')->get();
         return response()->json($orders);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        
-    }    
 
     /**
      * Update the specified resource in storage.
