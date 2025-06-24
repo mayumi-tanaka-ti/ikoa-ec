@@ -10,7 +10,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 Route::get('/products/list', [IkoaProductController::class, 'list']);
+
 Route::apiResource('products', IkoaProductController::class)->only(['index','show']);
+
 
 Route::post('/register', [AuthController::class, 'register']);   // ★任意
 Route::post('/login',    [AuthController::class, 'login'])->name('api.login');
@@ -22,7 +24,7 @@ Route::post('/admin_login',    [AuthController::class, 'adminLogin'])->name('api
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-
+});
     // role >= true のユーザーだけがアクセスできる
     Route::middleware(['auth:sanctum','can:admin'])->group(function () {
         Route::apiResource('products', ProductController::class);
@@ -30,4 +32,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware(['auth:sanctum','can:user'])->group(function () {
         Route::apiResource('products', ProductController::class);
     });
-});
