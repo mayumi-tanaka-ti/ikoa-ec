@@ -39,10 +39,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('/admin_products', ProductController::class);
         Route::get('/reviews/create', [ReviewController::class, 'create']);
         Route::apiResource('reviews', ReviewController::class)->only(['store','update','destroy']);
-    });
-});
-
-
-        Route::apiResource('products', ProductController::class);
         Route::apiResource('user/mypage', UserController::class);
     });
+
+
+      
+       
+
+
+
+        
+    
