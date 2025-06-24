@@ -16,9 +16,15 @@ Route::post('/login',    [AuthController::class, 'login'])->name('api.login');
 
 // Route::apiResource('products', ProductController::class);
 
-// auth:sanctumで囲むとトークン必要(ログイン必要)
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::apiResource('products', ProductController::class);
+
+    // role >= true のユーザーだけがアクセスできる
+    Route::middleware('can:admin')->group(function () {
+        Route::apiResource('products', ProductController::class);
+    });
 });
+
+
+
 
