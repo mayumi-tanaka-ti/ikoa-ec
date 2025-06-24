@@ -26,7 +26,6 @@ class IkoaProductController extends Controller
      */
     public function list()
     {
-        dd("テスト");
          $categories = Category::with('products')->get();
 
         return response()->json($categories);
