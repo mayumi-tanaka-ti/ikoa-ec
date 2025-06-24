@@ -6,12 +6,16 @@ use App\Http\Controllers\Api\User\IkoaProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\Admin\ProductController ;
 use App\Http\Controllers\Api\User\ReviewController ;
+use App\Http\Controllers\UserController;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::get('/products/list', [IkoaProductController::class, 'list']);
 Route::apiResource('products', IkoaProductController::class)->only(['index','show']);
+Route::get('/products/list', [IkoaProductController::class, 'list']);
+
+
 
 Route::post('/register', [AuthController::class, 'register']);   // ★任意
 Route::post('/login',    [AuthController::class, 'login'])->name('api.login');
@@ -26,7 +30,7 @@ Route::apiResource('reviews', ReviewController::class)->only(['index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-
+});
     // role >= true のユーザーだけがアクセスできる
     Route::middleware(['auth:sanctum','can:admin'])->group(function () {
         Route::apiResource('/admin_products', ProductController::class);
@@ -39,3 +43,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
+        Route::apiResource('products', ProductController::class);
+        Route::apiResource('user/mypage', UserController::class);
+    });
