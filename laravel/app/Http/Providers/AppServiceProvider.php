@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('all-user', function ($user) {
-        return $user->role >= false || $user->role === true;
+        return $user->role >= false || $user->role === false;
         });
     }
 }
