@@ -29,6 +29,7 @@ class UsersSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'is_admin' => true,
+                'role'=> true,//管理者
             ],
 
             // 管理者ユーザー 2
@@ -44,6 +45,7 @@ class UsersSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'is_admin' => true,
+                'role'=> true,//管理者
             ],
 
             // 一般ユーザー 1
@@ -59,6 +61,7 @@ class UsersSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'is_admin' => false,
+                'role'=> false,//利用者
             ],
             // 一般ユーザー 2
             [
@@ -73,6 +76,7 @@ class UsersSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'is_admin' => false,
+                'role'=> false,//利用者
             ],
         ]);
 
