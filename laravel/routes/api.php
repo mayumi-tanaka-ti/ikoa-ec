@@ -4,14 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\IkoaProductController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Api\Admin\ProductController ;
+use App\Http\Controllers\Api\Admin\ProductController;
+use App\Http\Controllers\UserController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+Route::apiResource('products', IkoaProductController::class)->only(['index','show']);
 Route::get('/products/list', [IkoaProductController::class, 'list']);
 
-Route::apiResource('products', IkoaProductController::class)->only(['index','show']);
 
 
 Route::post('/register', [AuthController::class, 'register']);   // ★任意
@@ -31,4 +32,5 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::middleware(['auth:sanctum','can:user'])->group(function () {
         Route::apiResource('products', ProductController::class);
+        Route::apiResource('user/mypage', UserController::class);
     });
