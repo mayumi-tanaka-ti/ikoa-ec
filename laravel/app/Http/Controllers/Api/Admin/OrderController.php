@@ -9,9 +9,6 @@ use App\Models\OrderProduct;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         // 注文と注文商品をまとめて取得
@@ -19,9 +16,6 @@ class OrderController extends Controller
         return response()->json($orders);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $order = Order::findOrFail($id);
