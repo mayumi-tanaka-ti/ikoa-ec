@@ -14,11 +14,20 @@ Route::get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);   // ★任意
 Route::post('/login',    [AuthController::class, 'login'])->name('api.login');
 
+
+Route::post('/admin_register', [AuthController::class, 'adminRegister']);   // ★任意
+Route::post('/admin_login',    [AuthController::class, 'adminLogin'])->name('api.login');
 // Route::apiResource('products', ProductController::class);
 
-// auth:sanctumで囲むとトークン必要(ログイン必要)
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::apiResource('products', ProductController::class);
+
+    // role >= true のユーザーだけがアクセスできる
+    Route::middleware(['auth:sanctum','can:admin'])->group(function () {
+        Route::apiResource('products', ProductController::class);
+    });
 });
+
+
+
 
