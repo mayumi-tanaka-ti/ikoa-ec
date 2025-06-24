@@ -18,7 +18,6 @@ class Order extends Model
                             'shipping_postal_code',
                             'recipient_name',
                             'recipient_phone',
-                            'recipient_phone',
                             'payment_status'
                            ];
     //
@@ -34,4 +33,12 @@ class Order extends Model
         return $this->belongsToMany(Product::class)
             ->withPivot('quantity','price');
     }
+
+
+    public function order_products()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }
+
+

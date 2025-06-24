@@ -10,5 +10,5 @@ class OrderProduct extends Model
      /** @use HasFactory<\Database\Factories\Order_productFactory> */
     use HasFactory;
     protected $fillable = ['quantity','price'];
-    protected $table = 'order_product';
+    protected $table = 'order_products';
 }
