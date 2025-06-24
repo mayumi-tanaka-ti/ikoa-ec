@@ -32,9 +32,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        // 注文と注文商品をまとめて取得
-        $order = Order::with('order_products.product')->findOrFail($id);
-        return response()->json($order);
+        
     }    
 
     /**
