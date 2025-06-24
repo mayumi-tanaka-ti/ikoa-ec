@@ -26,6 +26,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware(['auth:sanctum','can:admin'])->group(function () {
         Route::apiResource('products', ProductController::class);
     });
+    Route::middleware(['auth:sanctum','can:user'])->group(function () {
+        Route::apiResource('products', ProductController::class);
+    });
 });
 
 
