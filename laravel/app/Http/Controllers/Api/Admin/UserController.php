@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 
+
 class UserController extends Controller
 {
     /**
@@ -16,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();//すべてのユーザを取得
-        return view("admin.user.index", compact("users"));//ビューに渡す
+        return response()->json($users);
     }
 
     /**
@@ -33,7 +34,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::with("orders")->findOrFail($id);//IDでユーザ取得,購入履歴も
-        return view("admin.users.show", compact("user"));//ビューに渡す
+        return response()->json($user);
     }
 
     /**
@@ -54,9 +55,13 @@ class UserController extends Controller
     public function history(string $id)
     {
         $user = User::findOrFail($id);
-        $orders = $user->orders; // 購入履歴取得
-        return view('admin.users.history', compact('user', 'orders'));
-    }
+        $orders = $user->orders;
+        return response()->json([
+            'user' => $user,
+            'orders' => $orders
+    ]);
+}
+
     public function showLoginForm()
     {
     return view('admin.users.login');
