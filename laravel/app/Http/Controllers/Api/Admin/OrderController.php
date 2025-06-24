@@ -5,13 +5,10 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
-
+use App\Models\OrderProduct;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         // 注文と注文商品をまとめて取得
@@ -19,27 +16,6 @@ class OrderController extends Controller
         return response()->json($orders);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        // 注文と注文商品をまとめて取得
-        $order = Order::with('order_products.product')->findOrFail($id);
-        return response()->json($order);
-    }    
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $order = Order::findOrFail($id);
