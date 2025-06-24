@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             StockSeeder::class,
             OrderSeeder::class,
+            OrderProductSeeder::class,
         ]);
 
         User::factory()->create([
