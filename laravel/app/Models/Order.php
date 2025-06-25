@@ -18,6 +18,7 @@ class Order extends Model
                             'shipping_postal_code',
                             'recipient_name',
                             'recipient_phone',
+                            'payment_method', 
                             'payment_status'
                            ];
     //
@@ -35,7 +36,7 @@ class Order extends Model
     }
 
 
-    public function order_products()
+    public function orderProduct()
     {
         return $this->hasMany(OrderProduct::class);
     }
