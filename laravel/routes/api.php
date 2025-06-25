@@ -8,17 +8,11 @@ use App\Http\Controllers\Api\Admin\ProductController ;
 use App\Http\Controllers\Api\User\ReviewController ;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
-use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\ikoa\UserController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-
-Route::middleware(['auth:sanctum','can:user'])->group(function () {
-    Route::apiResource('user/products', IkoaProductController::class);
-    Route::apiResource('user/mypage', UserController::class);
-});
-
 
 //admin
 
@@ -28,7 +22,7 @@ Route::post('/login',    [AuthController::class, 'login'])->name('api.login');
 Route::post('/admin_register', [AuthController::class, 'adminRegister']);   // ★任意
 Route::post('/admin_login',    [AuthController::class, 'adminLogin'])->name('api.login');
 
-
+Route::apiResource('user/products', IkoaProductController::class);
 Route::apiResource('reviews', ReviewController::class)->only(['index']);
 //review画面のルート
 
@@ -36,12 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-    // role >= true のユーザーだけがアクセスできる
-    Route::middleware(['auth:sanctum','can:admin'])->group(function () {
-        Route::apiResource('/admin_products', ProductController::class);
-    });
+
     Route::middleware(['auth:sanctum','can:user'])->group(function () {
-        Route::apiResource('/admin_products', ProductController::class);
+        Route::apiResource('admin/products', ProductController::class);
         Route::get('/reviews/create', [ReviewController::class, 'create']);
         Route::apiResource('reviews', ReviewController::class)->only(['store','update','destroy']);
         Route::apiResource('user/mypage', UserController::class);
