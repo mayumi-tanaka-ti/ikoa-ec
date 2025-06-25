@@ -27,7 +27,6 @@ Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::apiResource('admin/orders', OrderController::class);
 });
 
-
 //ユーザー側---------------------
 
 Route::post('/register', [AuthController::class, 'register']);   // ★任意
