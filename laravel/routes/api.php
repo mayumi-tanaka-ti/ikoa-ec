@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\User\ReviewController ;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\ikoa\UserController;
+use App\Http\Controllers\Api\Ikoa\CartController;
+
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -30,6 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
+//カート機能のルート
+Route::apiResource('cart', CartController::class);
 
     Route::middleware(['auth:sanctum','can:user'])->group(function () {
         Route::apiResource('admin/products', ProductController::class);

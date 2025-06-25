@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\ikoa\Controllers;
+namespace App\Http\Controllers\Api\ikoa;
+use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Product;
