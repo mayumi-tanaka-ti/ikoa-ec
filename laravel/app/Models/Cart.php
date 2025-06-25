@@ -12,9 +12,9 @@ class Cart extends Model
 
     protected $fillable = ['user_id'];
 
-        public function user(): HasOne
+        public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
        public function products()      // N:N

@@ -19,7 +19,7 @@ class UserController extends Controller
 
     $user = Auth::user();
 
-    $validator = Validator::make($request->all(), [
+    $validated = $request->validate([
         'name' => 'required|string|max:255',
         'birthday' => 'nullable|date',
         'phone_number' => 'required|string|max:20',
@@ -28,11 +28,7 @@ class UserController extends Controller
         'email' => 'required|email|unique:users,email,' . $user->id,
     ]);
 
-    if ($validator->fails()) {
-        return response()->json(['errors' => $validator->errors()], 422);
-    }
-
-    $user->update($validator->validated());
+    $user->update($validated);
 
     return new UserResource($user);
     }
