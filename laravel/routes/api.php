@@ -40,8 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::apiResource('user/products', IkoaProductController::class);
-Route::apiResource('cart', CartController::class); //カート機能のルート
-//Route::apiResource('/ikoa/cart/purchase', CartController::class);
 Route::post('cart/purchase', [CartController::class, 'purchase']);
 Route::get('/cart/complete/{order}', [CartController::class, 'complete']);
 
@@ -50,6 +48,7 @@ Route::middleware(['auth:sanctum','can:user'])->group(function () {
     Route::get('/reviews/create', [ReviewController::class, 'create']);
     Route::get('user/mypage', [UserController::class, 'mypage']);
     Route::put('user/mypage', [UserController::class, 'update']);
+    Route::apiResource('cart', CartController::class); //カート機能のルート
 });
 
 Route::get('/user', function (Request $request) {
