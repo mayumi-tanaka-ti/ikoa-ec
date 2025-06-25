@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
+  </head>
+  <body>
+    <h1>ログイン</h1>
+    
+    <form id="loginForm">
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" name="email" type="email" placeholder="email" required>
+      </div>
+      
+      <div>
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password" placeholder="password" required>
+      </div>
+      
+      <button type="submit">Login</button>
+    </form>
+
+    <div id="message"></div>
+    
+    <p>
+      <a href="register.html">アカウントをお持ちでない方はこちら</a>
+    </p>
+
+    <div id="logoutSection" style="display: none;">
+      <h2>ログイン済み</h2>
+      <p>ログインが完了しました。</p>
+      <button id="logoutBtn">ログアウト</button>
+    </div>
+
+    <script type="module">
+      // API接続関数をインポート
+      import { apiClient } from '../../src/js/utils/api.js';
+
+      // メッセージ表示用関数
+      function showMessage(message, isError = false) {
+        const messageDiv = document.getElementById('message');
+        messageDiv.textContent = message;
+        messageDiv.style.color = isError ? 'red' : 'green';
+      }
+
+      // ログイン成功後の画面表示
+      function showLoggedInState() {
+        // ログインフォームを非表示にしてログアウトセクションを表示
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('logoutSection').style.display = 'block';
+        document.getElementById('message').textContent = '';
+      }
+
+      // ログインフォーム送信イベント
+      document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(e.target);
+        const loginData = {
+          email: formData.get('email'),
+          password: formData.get('password')
+        };
+
+        try {
+          const data = await apiClient.post('/login', loginData);
+          
+          // token を保存
+          localStorage.setItem('token', data.token);
+          if (data.user) {
+            localStorage.setItem('user', JSON.stringify(data.user));
+          }
+
+          showMessage('ログイン成功！', false);
+
+          // ログイン成功後の画面を表示
+          setTimeout(() => {
+            showLoggedInState();
+          }, 500);
+
+        } catch (error) {
+          console.error('ログインエラー:', error);
+          showMessage(error.message || 'ログインに失敗しました', true);
+        }
+      });
+
+      // ログアウトボタンのクリックイベント
+      document.getElementById('logoutBtn').addEventListener('click', async () => {
+        try {
+          // APIでログアウト
+          await apiClient.post('/logout', {});
+        } catch (error) {
+          console.error('ログアウトAPIエラー:', error);
+        } finally {
+          // ローカルストレージをクリア
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+
+          // フォームを再表示
+          document.getElementById('loginForm').style.display = 'block';
+          document.getElementById('logoutSection').style.display = 'none';
+          document.getElementById('loginForm').reset();
+          showMessage('ログアウトしました', false);
+        }
+      });
+
+      // ページ読み込み時にトークンがあるかチェック
+      window.addEventListener('load', () => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          // 既にログインしている場合はログイン済み画面を表示
+          showLoggedInState();
+        }
+      });
+    </script>
+  </body>
+</html>
