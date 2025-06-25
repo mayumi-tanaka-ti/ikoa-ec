@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\User\ReviewController ;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\AdminController;
-use App\Http\Controllers\Api\ikoa\UserController;
+use App\Http\Controllers\Api\Ikoa\UserController;
 use App\Http\Controllers\Api\Ikoa\CartController;
 
 

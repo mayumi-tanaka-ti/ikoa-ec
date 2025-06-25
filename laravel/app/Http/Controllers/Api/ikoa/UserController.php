@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\ikoa;
+namespace App\Http\Controllers\Api\Ikoa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function mypage(){
         $user = Auth::user(); // ログインユーザー取得
-        dd($user);
+        //dd($user);
         return new UserResource($user);
     }
 
