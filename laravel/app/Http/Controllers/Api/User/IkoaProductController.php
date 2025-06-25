@@ -38,7 +38,9 @@ class IkoaProductController extends Controller
     {
         //
          // 該当する商品データ1件を取得(なければ404を返す)
-        $product = Product::findOrFail($id);
+        $product = Product::where('id', $id)
+        ->with('review_users')->get();
+        dd($product);
         // 単一データの場合は、ProductResource を適用
         return new ProductResource($product);
     }
