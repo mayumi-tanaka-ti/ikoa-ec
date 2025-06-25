@@ -41,6 +41,7 @@ Route::apiResource('cart', CartController::class);
         Route::get('/reviews/create', [ReviewController::class, 'create']);
         Route::apiResource('reviews', ReviewController::class)->only(['store','update','destroy']);
         Route::get('user/mypage', [UserController::class, 'mypage']);
+        Route::put('user/mypage', [UserController::class, 'update']);
     });
 
 
