@@ -49,6 +49,7 @@ Route::apiResource('cart', CartController::class);
     Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::apiResource('admin/products', ProductController::class);
     Route::apiResource('admin/categories', CategoryController::class);
+    Route::apiResource('admin/history', AdminController::class);
     Route::apiResource('admin/users', AdminController::class);
     Route::apiResource('admin/orders', OrderController::class);
 });
