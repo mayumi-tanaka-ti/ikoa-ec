@@ -39,9 +39,10 @@ class ReviewController extends Controller
     {
         // バリデーション
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            
             'product_id' => 'required|exists:products,id',
-            'content' => 'required|string',
+            'rating' => 'required|integer|between:1,5',
+            'comment' => 'required|string',
         ]);
 
         $review = Review::create([
@@ -96,3 +97,4 @@ class ReviewController extends Controller
         return response()->json(['message' => 'レビューが削除されました']);
     }
 }
+
