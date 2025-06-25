@@ -6,13 +6,8 @@ use App\Http\Controllers\Api\User\IkoaProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\Admin\ProductController ;
 use App\Http\Controllers\Api\User\ReviewController ;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\Api\ikoa\IkoaProductController;
-use App\Http\Controllers\Api\ikoa\UserController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
-use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\UserController;
 
 Route::get('/user', function (Request $request) {
