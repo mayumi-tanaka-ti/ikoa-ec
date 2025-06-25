@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\ikoa\UserController;
 use App\Http\Controllers\Api\Ikoa\CartController;
 
+
 //管理側-----
 
 Route::post('/admin_register', [AuthController::class, 'adminRegister']);   // ★任意
