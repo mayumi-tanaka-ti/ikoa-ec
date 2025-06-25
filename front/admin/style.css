@@ -1,4 +1,0 @@
-body { font-family: sans-serif; margin: 40px; }
-.nav { display: flex; gap: 2rem; }
-.nav a { padding: 1rem 2rem; background: #1976d2; color: #fff; border-radius: 6px; text-decoration: none; font-size: 1.2rem; transition: background 0.2s; }
-.nav a:hover { background: #1565c0; }
