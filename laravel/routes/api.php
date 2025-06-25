@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\ProductController ;
 use App\Http\Controllers\Api\User\ReviewController ;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\OrderController;
+use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\ikoa\UserController;
 use App\Http\Controllers\Api\Ikoa\CartController;
 
@@ -29,9 +30,9 @@ Route::apiResource('user/products', IkoaProductController::class);
 Route::apiResource('reviews', ReviewController::class)->only(['index']);
 //review画面のルート
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthController::class, 'logout']);
-});
+        Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout']);
+    });
 
 //カート機能のルート
 Route::apiResource('cart', CartController::class);
@@ -44,11 +45,11 @@ Route::apiResource('cart', CartController::class);
     });
 
 
-// role >= true のユーザーだけがアクセスできる
-Route::middleware(['auth:sanctum','can:admin'])->group(function () {
+    // role >= true のユーザーだけがアクセスできる
+    Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::apiResource('admin/products', ProductController::class);
     Route::apiResource('admin/categories', CategoryController::class);
-    Route::apiResource('admin/users', UserController::class);
+    Route::apiResource('admin/users', AdminController::class);
     Route::apiResource('admin/orders', OrderController::class);
 });
 
