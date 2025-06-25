@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -83,4 +83,3 @@ public function login(Request $request)
 
 
 }
-
