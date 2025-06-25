@@ -14,7 +14,7 @@ class CartOrderResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $data = [
             'order_id' => $this->id,
             'user_id' => $this->user_id,
             'order_date' => $this->order_date,
@@ -38,5 +38,12 @@ class CartOrderResource extends JsonResource
                 });
             }),
         ];
+
+        // 完了画面用にメッセージを追加（リクエストに ?complete=1 がついてたら）
+        if ($request->query('complete')) {
+            $data['message'] = '支払いが完了しました。 ご注文ありがとうございました。';
+        }
+
+        return $data;
     }
 }

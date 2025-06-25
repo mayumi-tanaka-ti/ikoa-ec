@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\ikoa\UserController;
 use App\Http\Controllers\Api\Ikoa\CartController;
 
--------------管理側
+//-------------管理側
 Route::post('/admin_register', [AuthController::class, 'adminRegister']);   // ★任意
 Route::post('/admin_login',    [AuthController::class, 'adminLogin'])->name('api.login');
 
@@ -41,7 +41,7 @@ Route::apiResource('reviews', ReviewController::class)->only(['index']);
 Route::apiResource('cart', CartController::class); //カート機能のルート
 //Route::apiResource('/ikoa/cart/purchase', CartController::class);
 Route::post('cart/purchase', [CartController::class, 'purchase']);
-
+Route::get('/cart/complete/{order}', [CartController::class, 'complete']);
 
 Route::middleware(['auth:sanctum','can:user'])->group(function () {
     Route::apiResource('reviews', ReviewController::class)->only(['store','update','destroy']);

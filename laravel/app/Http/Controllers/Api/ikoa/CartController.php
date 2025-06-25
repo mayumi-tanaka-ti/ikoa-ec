@@ -160,4 +160,12 @@ class CartController extends Controller
             ], 500);
         }
     }
+
+    // 支払い完了処理
+    public function complete($orderId)
+    {
+        $order = Order::with('orderProducts.product')->findOrFail($orderId);
+
+        return new CartOrderResource($order);
+    }
 }
