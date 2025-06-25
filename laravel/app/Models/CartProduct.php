@@ -11,4 +11,15 @@ class Cart_product extends Model
     use HasFactory;
     protected $fillable = ['quantity','amount_price'];
     protected $table = 'cart_products';
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
 }
