@@ -5,8 +5,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Http\Resources\CartResource;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\CartOrderResource;
 
 class CartController extends Controller
 {
@@ -93,5 +97,67 @@ class CartController extends Controller
         $cartProduct->delete();
 
         return response()->json(['message' => '商品を削除しました']);
+    }
+
+
+    // 購入手続き処理
+    public function purchase(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'shipping_address' => 'required|string|max:225',
+            'shipping_postal_code' => 'required|string|max:20',
+            'recipient_name' => 'required|string|max:255',
+            'recipient_phone' => 'required|string|max:20',
+            'payment_method' => 'required|string|max:50',
+        ]);
+
+        DB::beginTransaction();
+
+        try{
+            $cart = Cart::where('user_id', $request->user_id)->firstOrFail();
+            $cartItems = $cart->cartProducts()->with('product')->get();
+
+            if ($cartItems->isEmpty()) {
+                return response()->json(['message' => 'カートが空です'], 400);
+            }
+
+            $totalPrice = $cartItems->sum('amount_price');
+
+            $order = Order::create([
+                'user_id' => $request->user_id,
+                'order_date' => now(),
+                'status' => 'processing',
+                'total_price' => $totalPrice,
+                'shipping_address' => $request->shipping_address,
+                'shipping_postal_code' => $request->shipping_postal_code,
+                'recipient_name' => $request->recipient_name,
+                'recipient_phone' => $request->recipient_phone,
+                'payment_method' => $request->payment_method,
+                'payment_status' => 'unpaid',
+            ]);
+
+            foreach ($cartItems as $item) {
+                OrderProduct::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->quantity,
+                    'price' => $item->product->price,
+                ]);
+            }
+
+            $cart->cartProducts()->delete();
+
+            DB::commit();
+
+            return new CartOrderResource($order->load('orderProducts.product'));
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'error' => '購入に失敗しました',
+                'details' => $e->getMessage()
+            ], 500);
+        }
     }
 }
