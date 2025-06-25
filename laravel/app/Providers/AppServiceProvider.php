@@ -11,9 +11,13 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    public function register(): void
+public function register(): void
     {
-        //
+        // ここでIlluminateのAuthenticateを自作Authenticateにバインド
+        $this->app->bind(
+            \Illuminate\Auth\Middleware\Authenticate::class,
+            \App\Http\Middleware\Authenticate::class
+        );
     }
 
     /**
@@ -23,10 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('admin', function ($user) {
-            return $user->is_admin = true;
+            return $user->is_admin == true;
         });
         Gate::define('user', function ($user) {
-            return $user->is_admin = false;
+            return $user->is_admin == false;
         });
     }
 
