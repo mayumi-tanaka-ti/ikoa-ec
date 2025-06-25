@@ -27,10 +27,10 @@ class ReviewController extends Controller
 
     }
 
-    //public function create()
-    //{
-    //    return response()->json(['message' => 'レビュー作成画面（APIでは不要）'], 200);
-    //}
+    public function create()
+    {
+        return response()->json(['message' => 'レビュー作成画面'], 200);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -39,9 +39,10 @@ class ReviewController extends Controller
     {
         // バリデーション
         $validated = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            
             'product_id' => 'required|exists:products,id',
-            'content' => 'required|string',
+            'rating' => 'required|integer|between:1,5',
+            'comment' => 'required|string',
         ]);
 
         $review = Review::create([
@@ -96,3 +97,4 @@ class ReviewController extends Controller
         return response()->json(['message' => 'レビューが削除されました']);
     }
 }
+
