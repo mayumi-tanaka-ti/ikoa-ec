@@ -31,7 +31,7 @@ class Product extends Model
         // 中間テーブルの外部キー以外の列を取得するには
         // withPivotで設定必要
         return $this->belongsToMany(User::class,'reviews')
-            ->withPivot('rating', 'comment','reviewdate');
+            ->withPivot('rating', 'comment','review_date');
     }
 
      public function carts()      // N:N
