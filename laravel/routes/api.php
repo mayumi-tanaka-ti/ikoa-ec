@@ -25,8 +25,9 @@ Route::post('/login',    [AuthController::class, 'login'])->name('api.login');
 Route::post('/admin_register', [AuthController::class, 'adminRegister']);   // ★任意
 Route::post('/admin_login',    [AuthController::class, 'adminLogin'])->name('api.login');
 
+Route::get('/user/products/list', [IkoaProductController::class, 'list']);
 Route::apiResource('user/products', IkoaProductController::class);
-Route::apiResource('reviews', ReviewController::class)->only(['index']);
+Route::get('/reviews/index', [ReviewController::class,'index']);
 //review画面のルート
 
 Route::middleware('auth:sanctum')->group(function () {

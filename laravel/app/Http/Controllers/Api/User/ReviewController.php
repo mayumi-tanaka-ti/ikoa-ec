@@ -37,6 +37,12 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        // バリデーション
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'product_id' => 'required|exists:products,id',
+            'content' => 'required|string',
+        ]);
 
         $review = Review::create([
             'user_id' => Auth::id(),
