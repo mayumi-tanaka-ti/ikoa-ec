@@ -38,7 +38,6 @@ Route::apiResource('reviews', ReviewController::class)->only(['index']);
 Route::apiResource('cart', CartController::class);
 
     Route::middleware(['auth:sanctum','can:user'])->group(function () {
-        Route::apiResource('admin/products', ProductController::class);
         Route::get('/reviews/create', [ReviewController::class, 'create']);
         Route::apiResource('reviews', ReviewController::class)->only(['store','update','destroy']);
         Route::get('user/mypage', [UserController::class, 'mypage']);
