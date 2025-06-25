@@ -17,4 +17,14 @@ class Review extends Model
                            'review_date'];
         // $tableで設定する (中間テーブルの名前を変える場合などに使う)
     protected $table = 'reviews';
+
+        public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
