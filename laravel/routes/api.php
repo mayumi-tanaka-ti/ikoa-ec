@@ -35,6 +35,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 //カート機能のルート
 Route::apiResource('cart', CartController::class);
+//Route::apiResource('/ikoa/cart/purchase', CartController::class);
+Route::post('cart/purchase', [CartController::class, 'purchase']);
+
 
     Route::middleware(['auth:sanctum','can:user'])->group(function () {
         Route::apiResource('admin/products', ProductController::class);
