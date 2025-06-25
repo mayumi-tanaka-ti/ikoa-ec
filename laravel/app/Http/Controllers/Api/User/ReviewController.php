@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Http\Resources\ReviewResource;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -14,10 +15,16 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
-         $reviews = Review::all();
-        // 取得したデータを ProductResource に変換し、統一フォーマットで返却
-        return ReviewResource::collection($reviews);
+        $userId = Auth::id(); // ログインしてるユーザーのid取得
+        
+        // 方法1: Reviewモデルから直接取得（商品情報も含める）
+        $reviews = Review::where('user_id', $userId)
+            ->with('product') // 商品情報も一緒に取得
+            ->orderBy('review_date', 'desc')
+            ->get();
+        
+        return response()->json($reviews);
+
     }
 
     public function create()
@@ -31,7 +38,7 @@ class ReviewController extends Controller
                 'review_date' => now(),
             ]
         );
-        return  (new ReviewResource($cafe))
+        return  (new ReviewResource($review))
         ->additional(['message' => '投稿が登録されました'])
         ->response()
         ->setStatusCode(201);
