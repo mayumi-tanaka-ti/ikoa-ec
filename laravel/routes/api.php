@@ -12,11 +12,13 @@ use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\ikoa\UserController;
 use App\Http\Controllers\Api\Ikoa\CartController;
 
-
-//管理側----------------------
-
+-------------管理側
 Route::post('/admin_register', [AuthController::class, 'adminRegister']);   // ★任意
 Route::post('/admin_login',    [AuthController::class, 'adminLogin'])->name('api.login');
+
+Route::get('/user/products/list', [IkoaProductController::class, 'list']);
+Route::apiResource('user/products', IkoaProductController::class);
+Route::get('/reviews/index', [ReviewController::class,'index']);
 
 Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::apiResource('admin/products', ProductController::class);
@@ -27,8 +29,6 @@ Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::apiResource('admin/orders', OrderController::class);
 });
 
-
-//ユーザー側---------------------
 
 Route::post('/register', [AuthController::class, 'register']);   // ★任意
 Route::post('/login',    [AuthController::class, 'login'])->name('api.login');
