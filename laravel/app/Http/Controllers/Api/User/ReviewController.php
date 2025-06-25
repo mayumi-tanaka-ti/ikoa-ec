@@ -27,22 +27,17 @@ class ReviewController extends Controller
 
     }
 
-    public function create()
-    {
-        // APIの場合、画面表示用のcreateは不要ですが、空メソッドとして残します
-        return response()->json(['message' => 'レビュー作成画面（APIでは不要）'], 200);
-    }
+    //public function create()
+    //{
+    //    return response()->json(['message' => 'レビュー作成画面（APIでは不要）'], 200);
+    //}
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required|string',
-        ]);
+
         $review = Review::create([
             'user_id' => Auth::id(),
             'product_id' => $validated['product_id'],
@@ -56,11 +51,11 @@ class ReviewController extends Controller
             ->setStatusCode(201);
     }
 
-    public function edit($id)
-    {
-        // APIの場合、画面表示用のeditは不要ですが、空メソッドとして残します
-        return response()->json(['message' => 'レビュー編集画面'], 200);
-    }
+    // public function edit($id)
+    // {
+    //     // APIの場合、画面表示用のeditは不要ですが、空メソッドとして残します
+    //     return response()->json(['message' => 'レビュー編集画面'], 200);
+    // }
 
     /**
      * Update the specified resource in storage.
