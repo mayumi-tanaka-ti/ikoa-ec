@@ -29,19 +29,8 @@ class ReviewController extends Controller
 
     public function create()
     {
-        
-        $review = Auth()->user->product()->attach(
-            $product->id,
-            [
-                'rating' => $request->input('rating'),
-                'comment' => $request->input('comment'),
-                'review_date' => now(),
-            ]
-        );
-        return  (new ReviewResource($review))
-        ->additional(['message' => '投稿が登録されました'])
-        ->response()
-        ->setStatusCode(201);
+        // APIの場合、画面表示用のcreateは不要ですが、空メソッドとして残します
+        return response()->json(['message' => 'レビュー作成画面（APIでは不要）'], 200);
     }
 
     /**
@@ -49,18 +38,28 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string',
+        ]);
+        $review = Review::create([
+            'user_id' => Auth::id(),
+            'product_id' => $validated['product_id'],
+            'rating' => $validated['rating'],
+            'comment' => $validated['comment'],
+            'review_date' => now(),
+        ]);
+        return (new ReviewResource($review))
+            ->additional(['message' => 'レビューが保存されました'])
+            ->response()
+            ->setStatusCode(201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
-                 // 該当する商品データ1件を取得(なければ404を返す)
-        $review = Review::findOrFail($id);
-        // 単一データの場合は、ProductResource を適用
-        return new ReviewResource($review);
+        // APIの場合、画面表示用のeditは不要ですが、空メソッドとして残します
+        return response()->json(['message' => 'レビュー編集画面'], 200);
     }
 
     /**
@@ -68,7 +67,18 @@ class ReviewController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $review = Review::findOrFail($id);
+        // 本人のみ編集可
+        if ($review->user_id !== Auth::id()) {
+            return response()->json(['message' => '権限がありません'], 403);
+        }
+        $validated = $request->validate([
+            'rating' => 'sometimes|required|integer|min:1|max:5',
+            'comment' => 'sometimes|required|string',
+        ]);
+        $review->update($validated);
+        return (new ReviewResource($review))
+            ->additional(['message' => 'レビューが更新されました']);
     }
 
     /**
@@ -76,6 +86,12 @@ class ReviewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $review = Review::findOrFail($id);
+        // 本人のみ削除可
+        if ($review->user_id !== Auth::id()) {
+            return response()->json(['message' => '権限がありません'], 403);
+        }
+        $review->delete();
+        return response()->json(['message' => 'レビューが削除されました']);
     }
 }
