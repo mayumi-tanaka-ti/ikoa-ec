@@ -43,8 +43,8 @@ Route::apiResource('user/products', IkoaProductController::class);
 Route::get('/cart/complete/{order}', [CartController::class, 'complete']);
 
 Route::middleware(['auth:sanctum','can:user'])->group(function () {
-    Route::apiResource('reviews', ReviewController::class);
     Route::get('/reviews/create', [ReviewController::class, 'create']);
+    Route::apiResource('reviews', ReviewController::class);
     Route::get('user/mypage', [UserController::class, 'mypage']);
     Route::put('user/mypage', [UserController::class, 'update']);
     Route::apiResource('cart', CartController::class); //カート機能のルート
