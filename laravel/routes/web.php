@@ -7,6 +7,6 @@ Route::get('/', function () {
 });
 
 // 管理者用のトップページ
-Route::get('/admin/index', function () {
+Route::get('/admin/home', function () {
     return file_get_contents(public_path('admin/index.html'));
 });

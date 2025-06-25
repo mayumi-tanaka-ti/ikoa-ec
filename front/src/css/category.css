@@ -2,3 +2,14 @@
 .category-title { font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem; }
 ul.product-list { margin: 0 0 1.5rem 1.5rem; padding: 0; list-style: disc; }
 ul.product-list li { margin-bottom: 0.3rem; }
+
+/* ボタン用 */
+.add-product-btn {
+    display:inline-block;
+    margin-bottom:1.5rem;
+    padding:0.5rem 1.2rem;
+    background:#43a047;
+    color:#fff;
+    border-radius:5px;
+    text-decoration:none;
+}
