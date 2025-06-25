@@ -27,10 +27,10 @@ class ReviewController extends Controller
 
     }
 
-    //public function create()
-    //{
-    //    return response()->json(['message' => 'レビュー作成画面（APIでは不要）'], 200);
-    //}
+    public function create()
+    {
+        return response()->json(['message' => 'レビュー作成画面'], 200);
+    }
 
     /**
      * Store a newly created resource in storage.
