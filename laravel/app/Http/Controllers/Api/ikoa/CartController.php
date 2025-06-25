@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\ikoa;
+namespace App\Http\Controllers\Api\Ikoa;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartProduct;
@@ -104,7 +104,7 @@ class CartController extends Controller
     public function purchase(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            //'user_id' => 'required|exists:users,id',
             'shipping_address' => 'required|string|max:225',
             'shipping_postal_code' => 'required|string|max:20',
             'recipient_name' => 'required|string|max:255',
@@ -125,7 +125,8 @@ class CartController extends Controller
             $totalPrice = $cartItems->sum('amount_price');
 
             $order = Order::create([
-                'user_id' => $request->user_id,
+                //'user_id' => $request->user_id,
+                'user_id' => $user->id,
                 'order_date' => now(),
                 'status' => 'processing',
                 'total_price' => $totalPrice,
