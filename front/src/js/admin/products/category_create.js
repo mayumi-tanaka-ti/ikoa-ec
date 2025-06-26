@@ -13,11 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('result').textContent = '登録中...';
             // カテゴリ登録リクエスト
             try {
-                // apiClientでPOST
-                const res = await apiClient.post('/admin/categories', formData, {
-                    headers: { 'Authorization': localStorage.getItem('token') ? 'Bearer ' + localStorage.getItem('token') : undefined }
-                });
-                document.getElementById('result').textContent = res.status === 200 || res.status === 201 ? '登録成功' : '登録失敗: ' + (res.data?.message || JSON.stringify(res.data?.errors) || '');
+                // Authorizationヘッダーを動的にセット
+                const headers = {};
+                const token = localStorage.getItem('token');
+                if (token) headers['Authorization'] = 'Bearer ' + token;
+
+                const res = await apiClient.post('/admin/categories', formData, { headers });
+                console.log(res); // ← レスポンス全体を確認
+                const isSuccess = [200, 201, 204].includes(res.status);
+                document.getElementById('result').textContent =
+                    isSuccess
+                        ? '登録成功'
+                        : '登録失敗: ' + (res.data?.message || JSON.stringify(res.data?.errors) || '');
+                if (isSuccess) form.reset();
             } catch (err) {
                 document.getElementById('result').textContent = '通信エラー';
             }
