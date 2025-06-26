@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CartResource;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\CartOrderResource;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -21,7 +22,7 @@ class CartController extends Controller
     // カート一覧
      public function index(Request $request)
     {
-        $userId = $request->user_id;
+        $userId = Auth::id();
         $cart = Cart::where('user_id', $userId)->firstOrFail();
         $items = $cart->cartProducts()->with('product')->get();
 
