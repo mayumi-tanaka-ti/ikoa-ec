@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>商品登録</title>
+    <link rel="stylesheet" href="/src/css/style.css">
+</head>
+<body>
+    <h1>商品登録</h1>
+    <form id="product-form" enctype="multipart/form-data">
+        <div>
+            <label>商品名: <input type="text" name="name" required></label>
+        </div>
+        <div>
+            <label>価格: <input type="number" name="price" required></label>
+        </div>
+        <div>
+            <label>画像: <input type="file" name="image_path" accept="image/*"></label>
+        </div>
+        <div>
+            <label>説明: <textarea name="description"></textarea></label>
+        </div>
+        <div>
+            <label>在庫: <input type="number" name="stock" required></label>
+        </div>
+        <div>
+            <label>カテゴリ:
+                <select name="category_id" id="category-select" required></select>
+            </label>
+        </div>
+        <button type="submit">登録</button>
+    </form>
+    <div id="result"></div>
+    <script src="/src/js/admin/products/create.js"></script>
+</body>
+</html>

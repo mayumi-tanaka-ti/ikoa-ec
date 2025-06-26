@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\Admin\OrderController;
 use App\Http\Controllers\Api\Admin\AdminController;
 use App\Http\Controllers\Api\Ikoa\UserController;
 use App\Http\Controllers\Api\Ikoa\CartController;
-
+use App\Http\Controllers\Api\Ikoa\HistoryController;
 
 //管理側-----
 
@@ -40,7 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::apiResource('user/products', IkoaProductController::class);
-Route::post('cart/purchase', [CartController::class, 'purchase']);
 Route::get('/cart/complete/{order}', [CartController::class, 'complete']);
 
 Route::middleware(['auth:sanctum','can:user'])->group(function () {
@@ -51,6 +50,8 @@ Route::middleware(['auth:sanctum','can:user'])->group(function () {
     Route::get('user/mypage', [UserController::class, 'mypage']);
     Route::put('user/mypage', [UserController::class, 'update']);
     Route::apiResource('cart', CartController::class); //カート機能のルート
+    Route::post('cart/purchase', [CartController::class, 'purchase']);
+    Route::get('user/history', [HistoryController::class, 'history']);
 });
 
 Route::get('/user', function (Request $request) {
