@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>商品編集</title>
+    <link rel="stylesheet" href="/admin/style.css">
+    <link rel="stylesheet" href="/src/css/product_show.css">
+</head>
+<body>
+    <h1>商品編集</h1>
+    <form id="product-edit-form" enctype="multipart/form-data">
+        <div>
+            <label>商品名: <input type="text" name="name" id="product-name" required></label>
+        </div>
+        <div>
+            <label>価格: <input type="number" name="price" id="product-price" required></label>
+        </div>
+        <div>
+            <label>画像: <input type="file" name="image_path" id="product-image"></label>
+            <div id="current-image"></div>
+        </div>
+        <div>
+            <label>説明: <textarea name="description" id="product-description"></textarea></label>
+        </div>
+        <div>
+            <label>在庫: <input type="number" name="stock" id="product-stock" required></label>
+        </div>
+        <div>
+            <label>カテゴリ:
+                <select name="category_id" id="category-select" required></select>
+            </label>
+        </div>
+        <button type="submit">更新</button>
+        <button type="button" id="delete-product-btn" style="margin-left:1rem;">削除</button>
+    </form>
+    <div id="result"></div>
+    <a href="/admin/products/show.html" id="back-to-show">← 詳細に戻る</a>
+    <script src="/src/js/admin/products/edit.js"></script>
+</body>
+</html>
