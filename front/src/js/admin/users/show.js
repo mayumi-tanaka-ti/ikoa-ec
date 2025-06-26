@@ -1,6 +1,6 @@
 import {apiClient} from "../../utils/api.js"
 
-document.addEventLisner("DOMContentLoaded", async() => {
+document.addEventListener("DOMContentLoaded", async() => {
     const urlParams = new URLSearchParams(window.location.search)
     const userId = urlParams.get('id')
 
@@ -14,24 +14,24 @@ document.addEventLisner("DOMContentLoaded", async() => {
         const response = await apiClient.get(`/user/${userId}`)
         const user = response.data || response
 
-        console.log('ユーザ情報詳細：', cafe)
+        console.log('ユーザ情報詳細：', user)
 
         document.getElementById("user-details").innerHTML = `
         <div class="user-info">
-        <div class="info-row"><label>ID:</label><span>${users.id}</span></div>
-        <div class="info-row"><label>名前：</label><span>${users.name}</span></div>
-        <div class="info-row"><label>性別：</label><span>${users.gender}</span></div>
-        <div class="info-row"><label>電話番号:</label><span>${users.pshone_number}</span></div>
-        <div class="info-row"><label>郵便番号:</label><span>${users.post_code}</span></div>
-        <div class="info-row"><label>住所:</label><span>${users.address}</span></div>
-        <div class="info-row"><label>メール:</label><span>${users.email}</span></div>
-        <div class="info-row"><label>パスワード:</label><span>${users.password}</span></div>
-        <div class="info-row"><label>登録日時:</label><span>${new Date(users.created_at).toLocaleString('ja-JP')}</span></div>
-        <div class="info-row"><label>更新日時:</label><span>${new Date(users.update_at).toLocaleString('ja-JP')}</span></div>
+        <div class="info-row"><label>ID:</label><span>${user.id}</span></div>
+        <div class="info-row"><label>名前：</label><span>${user.name}</span></div>
+        <div class="info-row"><label>性別：</label><span>${user.gender}</span></div>
+        <div class="info-row"><label>電話番号:</label><span>${user.pshone_number}</span></div>
+        <div class="info-row"><label>郵便番号:</label><span>${user.post_code}</span></div>
+        <div class="info-row"><label>住所:</label><span>${user.address}</span></div>
+        <div class="info-row"><label>メール:</label><span>${user.email}</span></div>
+        <div class="info-row"><label>パスワード:</label><span>${user.password}</span></div>
+        <div class="info-row"><label>登録日時:</label><span>${new Date(user.created_at).toLocaleString('ja-JP')}</span></div>
+        <div class="info-row"><label>更新日時:</label><span>${new Date(user.updated_at).toLocaleString('ja-JP')}</span></div>
         </div>
-        
+        <br>
         <div class="action-buttons">
-        <a href="../../../users/index.html">一覧に戻る</a>
+        <button onclick="location.href='../../../admin/users/user.html'">一覧に戻る</button>
         </div>
         `
     } catch (error) {
