@@ -40,14 +40,13 @@ class ReviewController extends Controller
         // バリデーション
         $validated = $request->validate([
             
-            'product_id' => 'required|exists:products,id',
             'rating' => 'required|integer|between:1,5',
             'comment' => 'required|string',
         ]);
 
         $review = Review::create([
             'user_id' => Auth::id(),
-            'product_id' => $validated['product_id'],
+            'product_id' => $id,
             'rating' => $validated['rating'],
             'comment' => $validated['comment'],
             'review_date' => now(),
