@@ -33,9 +33,13 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::with("orders")->findOrFail($id);//IDでユーザ取得,購入履歴も
-        return response()->json($user);
+    // IDでユーザを取得。見つからなければ404
+    $user = User::findOrFail($id);
+    
+    // すべてのカラムをJSONで返す（Laravelはモデルのfillable属性に従う）
+    return response()->json($user);
     }
+
 
     /**
      * Update the specified resource in storage.
