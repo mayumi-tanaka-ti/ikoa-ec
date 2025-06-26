@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         <div class="info-row"><label>ID:</label><span>${user.id}</span></div>
         <div class="info-row"><label>名前：</label><span>${user.name}</span></div>
         <div class="info-row"><label>性別：</label><span>${user.gender}</span></div>
+        <div class="info-row"><label>誕生日：</label><span>${user.birthda}</span></div>
         <div class="info-row"><label>電話番号:</label><span>${user.pshone_number}</span></div>
         <div class="info-row"><label>郵便番号:</label><span>${user.post_code}</span></div>
         <div class="info-row"><label>住所:</label><span>${user.address}</span></div>
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async() => {
         <br>
         <div class="action-buttons">
         <button onclick="location.href='../../../admin/users/user.html'">一覧に戻る</button>
+        <button onclick="location.href='../users/history.html?id=${user.id}'">購入履歴</button>
         </div>
         `
     } catch (error) {
