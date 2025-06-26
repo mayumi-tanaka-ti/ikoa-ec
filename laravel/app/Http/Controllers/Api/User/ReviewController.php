@@ -15,15 +15,15 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id(); // ログインしてるユーザーのid取得
+        // $userId = Auth::id(); // ログインしてるユーザーのid取得
         
-        // 方法1: Reviewモデルから直接取得（商品情報も含める）
-        $reviews = Review::where('user_id', $userId)
-            ->with('product') // 商品情報も一緒に取得
-            ->orderBy('review_date', 'desc')
-            ->get();
+        // // 方法1: Reviewモデルから直接取得（商品情報も含める）
+        // $review = Review::where('user_id', $userId)
+        //     ->with('product') // 商品情報も一緒に取得
+        //     ->orderBy('review_date', 'desc')
+        //     ->get();
         
-        return response()->json($reviews);
+        // return response()->json($reviews);
 
     }
 
@@ -35,7 +35,7 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $id)
     {
         // バリデーション
         $validated = $request->validate([

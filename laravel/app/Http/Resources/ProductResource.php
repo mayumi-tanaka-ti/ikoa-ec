@@ -12,7 +12,7 @@ class ProductResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+     public function toArray(Request $request): array
     {
         //return parent::toArray($request);
         return [
@@ -25,6 +25,19 @@ class ProductResource extends JsonResource
         'category_id' => $this->category_id,
         'created_at' => $this->created_at,
         'updated_at' => $this->updated_at,
+        // レビュー情報が読み込まれている場合のみ含める
+        'reviews' => $this->when($this->relationLoaded('review_users'), function () {
+            return $this->review_users->map(function ($user) {
+                return [
+                    'user_id' => $user->id,
+                    'user_name' => $user->name,
+                    'rating' => $user->pivot->rating,
+                    'comment' => $user->pivot->comment,
+                    'review_date' => $user->pivot->review_date,
+                ];
+            });
+        }),
     ];
     }
-}
+    }
+

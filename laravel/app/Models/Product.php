@@ -60,4 +60,9 @@ class Product extends Model
         return $this->hasMany(Stock::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 }
