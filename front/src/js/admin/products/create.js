@@ -21,7 +21,7 @@ function getToken() {
     return token ? 'Bearer ' + token : '';
 }
 
-// 商品登録フォームの送信処理
+// 商品登録フォーム送信
 if (document.getElementById('product-form')) {
     document.getElementById('product-form').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -30,6 +30,7 @@ if (document.getElementById('product-form')) {
         const btn = form.querySelector('button[type=\"submit\"]');
         btn.disabled = true;
         document.getElementById('result').textContent = '登録中...';
+        // 商品登録リクエスト
         try {
             const res = await fetch('/api/admin/products', {
                 method: 'POST',
