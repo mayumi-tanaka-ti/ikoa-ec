@@ -18,9 +18,6 @@ use App\Http\Controllers\Api\Ikoa\HistoryController;
 Route::post('/admin_register', [AuthController::class, 'adminRegister']);   // ★任意
 Route::post('/admin_login',    [AuthController::class, 'adminLogin'])->name('api.login');
 
-Route::get('/user/products/list', [IkoaProductController::class, 'list']);
-Route::apiResource('user/products', IkoaProductController::class);
-Route::get('/reviews/index', [ReviewController::class,'index']);
 
 Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::apiResource('admin/products', ProductController::class);
@@ -41,6 +38,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::apiResource('user/products', IkoaProductController::class);
 Route::get('/cart/complete/{order}', [CartController::class, 'complete']);
+
+Route::get('/user/products/list', [IkoaProductController::class, 'list']);
+Route::apiResource('user/products', IkoaProductController::class);
+Route::get('/reviews/index', [ReviewController::class,'index']);
 
 Route::middleware(['auth:sanctum','can:user'])->group(function () {
     Route::get('/reviews/create/{id}', [ReviewController::class, 'create']);
