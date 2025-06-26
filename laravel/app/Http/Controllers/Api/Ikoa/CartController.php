@@ -124,7 +124,7 @@ class CartController extends Controller
         DB::beginTransaction();
 
         try{
-            $cart = Cart::where('user_id', $request->user_id)->firstOrFail();
+            $cart = Cart::where('user_id', Auth::id())->firstOrFail();
             $cartItems = $cart->cartProducts()->with('product')->get();
 
             if ($cartItems->isEmpty()) {
@@ -135,7 +135,7 @@ class CartController extends Controller
 
             $order = Order::create([
                 //'user_id' => $request->user_id,
-                'user_id' => $user->id,
+                'user_id' => Auth::id(),
                 'order_date' => now(),
                 'status' => 'processing',
                 'total_price' => $totalPrice,
