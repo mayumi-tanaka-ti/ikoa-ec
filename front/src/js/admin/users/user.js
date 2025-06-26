@@ -16,7 +16,7 @@ async function loadUser(){
         `<div style="margin-bottom: 1em;">
         名前：${user.name}<br>
         電話番号：${user.phone_number}<br>
-        <a href="../users/show.html?id=${user.id}">詳細</a>
+        <button onclick="location.href='../users/show.html?id=${user.id}'">詳細</button>
         </div>
         <br>`
     ).join('')
