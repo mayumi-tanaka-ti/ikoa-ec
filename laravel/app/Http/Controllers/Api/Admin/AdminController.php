@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\UserResource;
 
 
 
@@ -16,7 +17,7 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::all();//すべてのユーザを取得
-        return response()->json($users);
+        return UserResource::collection($users);
     }
 
     /**
