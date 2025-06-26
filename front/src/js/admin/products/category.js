@@ -10,15 +10,12 @@ async function fetchCategoriesWithProducts() {
     container.innerHTML = '';
 
     for (const category of categories.data || categories) {
-        //カテゴリ名表示
         const catDiv = document.createElement('div');
         catDiv.className = 'category';
-        catDiv.innerHTML = `<div class="category-title">${category.name}</div>`;
+        catDiv.innerHTML = `<div class="category-title">${category.name} <a href=\"/admin/products/category_edit.html?id=${category.id}\" class=\"edit-category-link\">編集</a></div>`;
         // 商品一覧取得（カテゴリIDで絞り込み）
         const prodRes = await fetch(`/api/admin/products?category_id=${category.id}`);
         const products = await prodRes.json();
-
-        // 商品リストを作成
         const ul = document.createElement('ul');
         ul.className = 'product-list';
         for (const product of products.data || products) {
