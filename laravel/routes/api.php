@@ -23,6 +23,7 @@ Route::apiResource('user/products', IkoaProductController::class);
 Route::get('/reviews/index', [ReviewController::class,'index']);
 
 Route::middleware(['auth:sanctum','can:admin'])->group(function () {
+    Route::post('admin/products/{id}', [ProductController::class, 'update']);
     Route::apiResource('admin/products', ProductController::class);
     Route::get('admin/products/category', [CategoryController::class, 'category']);
     Route::apiResource('admin/categories', CategoryController::class);
