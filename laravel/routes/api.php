@@ -49,8 +49,8 @@ Route::middleware(['auth:sanctum','can:user'])->group(function () {
     Route::delete('/reviews/delete/{product_id}/{review_id}', [ReviewController::class, 'destroy']);
     Route::get('user/mypage', [UserController::class, 'mypage']);
     Route::put('user/mypage', [UserController::class, 'update']);
-    Route::apiResource('cart', CartController::class); //カート機能のルート
     Route::post('cart/purchase', [CartController::class, 'purchase']);
+    Route::apiResource('cart', CartController::class); //カート機能のルート
     Route::get('user/history', [HistoryController::class, 'history']);
 });
 
