@@ -94,7 +94,15 @@ class CartController extends Controller
     // 商品削除
     public function destroy(string $id)
     {
-        $cartProduct = CartProduct::findOrFail($id);
+        $user = 3;
+        //$userId = Auth::id();
+        $productId = $request->input('product_id');
+        
+        $cartProduct = CartProduct::where('user_id', $userId)
+                              ->where('product_id', $productId)
+                              ->firstOrFail();
+        //$cartProduct = CartProduct::findOrFail($id);
+        
         $cartProduct->delete();
 
         return response()->json(['message' => '商品を削除しました']);
