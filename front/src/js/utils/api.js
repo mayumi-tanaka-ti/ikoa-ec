@@ -14,10 +14,10 @@ export const apiClient = {
         const data = await response.json()
         
         if (!response.ok) {
-            throw data
+            throw {status: response.status || "a", data: data};
         }
         
-        return data
+        return  {status: response.status || "a", data: data};
     },
     
     async post(endpoint, data) {
@@ -48,7 +48,7 @@ export const apiClient = {
             throw responseData
         }
         
-        return responseData
+        return {status: response.status || "a", data: data};
     },
     
     async put(endpoint, data) {
