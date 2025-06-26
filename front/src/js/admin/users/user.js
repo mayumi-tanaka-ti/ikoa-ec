@@ -14,9 +14,11 @@ async function loadUser(){
     const listElement = document.getElementById('user_name')
     listElement.innerHTML = users.map(user =>
         `<div>
-        名前：${user.name} 電話番号：￥${user.phone_number}
+        名前：${user.name}<br>
+        電話番号：${user.phone_number}<br>
         <a href ="../users/show.html"@?id=${user.id}">詳細<a/>
-        </div>`
+        </div>
+        <br>`
     ).join('')
     }catch(error){
         console.log('商品の取得に失敗：', error)
