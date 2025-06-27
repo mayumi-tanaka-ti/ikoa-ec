@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>カート</title>
+</head>
+<body>
+  <nav>
+    <a href="/ikoa/products/index.html">カテゴリ一覧</a>
+    <a href="/ikoa/products/mypage.html">マイページ</a>
+    <a href="/ikoa/products/favorite.html">お気に入り</a>
+  </nav>
+
+  <main>
+    <h1>カート</h1>
+
+    <div id="cart-items">
+      <p>読み込み中...</p>
+    </div>
+
+    <div>
+      <strong>合計:</strong> <span id="total-price">0</span> 円
+    </div>
+
+    <div>
+      <button id="purchase-btn">購入手続きへ</button>
+    </div>
+  </main>
+
+  <script type="module" src="/src/js/ikoa/cart/cart.js"></script>
+</body>
+</html>
