@@ -29,6 +29,30 @@ class IkoaProductController extends Controller
          $categories = Category::with('products')->get();
 
         return response()->json($categories);
+
+         $query = \App\Models\Product::query();
+
+    // 商品名で検索
+    if ($request->filled('keyword')) {
+        $query->where('name', 'like', '%' . $request->keyword . '%');
+    }
+
+    // カテゴリーで検索
+    if ($request->filled('category_id')) {
+        $query->where('category_id', $request->category_id);
+    }
+
+    // 新着順（created_at降順）
+    if ($request->input('sort') === 'new') {
+        $query->orderBy('created_at', 'desc');
+    } else {
+        $query->orderBy('id', 'asc'); // デフォルト
+    }
+
+    // 必要に応じてページネーション
+    $products = $query->with('category')->get();
+
+    return response()->json($products);
     }
 
     /**

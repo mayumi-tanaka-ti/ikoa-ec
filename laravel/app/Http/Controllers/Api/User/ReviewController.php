@@ -66,9 +66,9 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $review_id)
     {
-        $review = Review::findOrFail($id);
+        $review = Review::findOrFail($review_id);
         // 本人のみ編集可
         if ($review->user_id !== Auth::id()) {
             return response()->json(['message' => '権限がありません'], 403);
