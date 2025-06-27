@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             throw new Error('データの取得に失敗しました');
         }
 
-        const categories = await response.json();
+        const json = await response.json();
+        const categories = json.data || json; // APIレスポンスの形に合わせて調整
 
         // 指定カテゴリを探す
         const category = categories.find(cat => String(cat.id) === categoryId);
