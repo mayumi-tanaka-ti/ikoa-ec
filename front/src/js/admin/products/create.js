@@ -37,7 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById('result').textContent = isSuccess ? '登録成功' : '登録失敗: ' + (res.data?.message || JSON.stringify(res.data?.errors) || '');
                 if (isSuccess) form.reset();
             } catch (err) {
-                document.getElementById('result').textContent = '通信エラー';
+                console.log('登録エラー詳細:', err);
+                if (err && err.data && err.data.errors) {
+                    document.getElementById('result').textContent = '登録失敗: ' + JSON.stringify(err.data.errors);
+                } else if (err && err.errors) {
+                    document.getElementById('result').textContent = '登録失敗: ' + JSON.stringify(err.errors);
+                } else if (typeof err === 'object') {
+                    document.getElementById('result').textContent = '登録失敗: ' + JSON.stringify(err);
+                } else {
+                    document.getElementById('result').textContent = '通信エラー';
+                }
             }
             btn.disabled = false;
         });

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = `
                 <div class="product-show-box">
                     <h2>${data.name}</h2>
-                    ${data.image_path ? `<img src="/storage/${data.image_path}" alt="${data.name}" style="max-width:200px;">` : ''}
+                    ${data.image_path ? `<img src="http://localhost/laravel/public/storage/${data.image_path}" alt="${data.name}" style="max-width:200px;">` : ''}
                     <p>価格: <strong>￥${data.price.toLocaleString()}</strong></p>
                     <p>説明: ${data.description || '-'}</p>
                     <p>在庫: ${data.stock}</p>
