@@ -17,7 +17,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const result = await response.json();   // ← JSONレスポンスを取得
         const product = result.data;            // ← dataから product を取り出す
 
+        const imageUrl = `http://localhost:8000/storage/${product.image_path}`;
+
         detailContainer.innerHTML = `
+            <img src="${imageUrl}" alt="${product.name}" style="width: 150px; height: auto;"><br>
             <p><strong>商品名：</strong>${product.name}</p>
             <p><strong>価格：</strong>${product.price}</p>
             <p><strong>説明：</strong>${product.description}</p>
