@@ -59,12 +59,16 @@ class AdminController extends Controller
     public function history(string $id)
     {
         $user = User::findOrFail($id);
-        $orders = $user->orders;
+
+        // 注文とそれに紐づく商品を取得
+        $orders = $user->orders()->with('products')->get();
+
         return response()->json([
             'user' => $user,
             'orders' => $orders
-    ]);
-}
+        ]);
+    }
+
 
     public function showLoginForm()
     {
