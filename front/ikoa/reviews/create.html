@@ -30,6 +30,9 @@
             <button type="submit">投稿する</button>
         </form>
         <div id="result" style="margin-top:1em;color:green;"></div>
+        <div style="margin-top:2em;text-align:center;">
+            <a id="toProductDetail" href="#">商品詳細へ戻る</a>
+        </div>
     </div>
     <script>
     const apiBase = 'http://localhost:8000';
@@ -38,6 +41,7 @@
     const productId = urlParams.get('product_id');
     if (productId) {
         document.getElementById('product_id').value = productId;
+        document.getElementById('toProductDetail').href = `/ikoa/products/show.html?product_id=${productId}`;
     }
     document.getElementById('reviewForm').addEventListener('submit', async function(e) {
         e.preventDefault();
