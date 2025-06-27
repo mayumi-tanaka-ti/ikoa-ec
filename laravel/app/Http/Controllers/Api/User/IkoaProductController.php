@@ -30,6 +30,20 @@ class IkoaProductController extends Controller
 
         return response()->json($categories);
     }
+        // public function list(Request $request)
+        // {
+        //     // クエリパラメータから category_id を取得
+        //     $categoryId = $request->query('category_id');
+
+        //     // category_id が指定されていれば絞り込み
+        //     if ($categoryId) {
+        //         $products = Product::where('category_id', $categoryId)->get();
+        //     } else {
+        //         $products = Product::all();
+        //     }
+
+        //     return ProductResource::collection($products);
+        // }
 
     /**
      * Display the specified resource.
