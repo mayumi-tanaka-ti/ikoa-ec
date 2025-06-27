@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
 
         document.getElementById('write-review').addEventListener('click', () => {
-            window.location.href = `/ikoa/products/review.html?id=${product.id}`;
+            window.location.href = `/ikoa/review.html?id=${product.id}`;
         });
 
     } catch (error) {
