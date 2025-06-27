@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
             [
                 'name' => '引き出し付きシングルベッド',
                 'price' => 39900,
-                'image_path' => 'images/products/single_bed_drawer.jpg',
+                'image_path' => 'products/image001.jpg',
                 'description' => '限られたスペースを有効活用できる、引き出し付きのシングルベッド。衣類や寝具の収納に便利です。',
                 'stock' => 20,
                 'category_id' => 1,
@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'レトロ本革カウチソファ',
                 'price' => 79800,
-                'image_path' => 'images/products/leather_couch.jpg',
+                'image_path' => 'products/image002.jpg',
                 'description' => '上質な本革を使用したレトロデザインのカウチソファ。3人掛けで、座り心地も抜群。',
                 'stock' => 15,
                 'category_id' => 2,
@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
             [
                 'name' => '北欧柄コットンラグ',
                 'price' => 2999, 
-                'image_path' => 'images/products/nordic_cotton_rug.jpg',
+                'image_path' => 'products/image003.jpg',
                 'description' => '北欧スタイルの幾何学模様が特徴のコットンラグ。軽量で洗濯可能、ナチュラルな質感がリビングやベッドルームにぴったり。',
                 'stock' => 30,
                 'category_id' => 3, 

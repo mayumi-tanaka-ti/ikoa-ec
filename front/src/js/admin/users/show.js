@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", async() => {
     }
 
     try{
-        const response = await apiClient.get(`/user/${userId}`)
-        const user = response.data || response
+        const response = await apiClient.get(`/admin/users/${userId}`)
+        console.log(response);
+        const user = response.data
 
         console.log('ユーザ情報詳細：', user)
 
