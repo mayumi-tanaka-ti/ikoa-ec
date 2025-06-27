@@ -15,10 +15,22 @@
     </nav>
 
     <main>
-        <h2 id="category-title">商品一覧</h2>
-        <div id="product-list"></div>
-        <!-- <button onclick="location.href='../products/list.html?id=${category.id}'">詳細</button> -->
-    </main>
+    <h2 id="category-title">カテゴリ名</h2>
+
+    <!--検索と並び替え -->
+    <div style="margin-bottom: 1em;">
+        <input type="text" id="searchInput" placeholder="商品名で検索">
+        <select id="sortSelect">
+            <option value="name_asc">名前順（昇順）</option>
+            <option value="name_desc">名前順（降順）</option>
+            <option value="price_asc">価格順（安い順）</option>
+            <option value="price_desc">価格順（高い順）</option>
+        </select>
+    </div>
+
+    <div id="product-list"></div>
+</main>
+
 
     <script type="module" src="/src/js/ikoa/products/list.js"></script>
 </body>

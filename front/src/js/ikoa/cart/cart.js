@@ -41,16 +41,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       cartItemsDiv.innerHTML = '';
       data.items.forEach(item => {
-        const subtotal = item.quantity * item.product.price;
-        const itemDiv = document.createElement('div');
-        itemDiv.innerHTML = `
-          <p>
-            <strong>${item.product.name}</strong> - ${item.product.price}円 × 
-            <input type="number" min="1" value="${item.quantity}" data-id="${item.id}" class="qty-input" style="width: 50px;">
-            = ${subtotal}円
-            <button data-id="${item.id}" class="delete-btn">削除</button>
-          </p>
-        `;
+      const subtotal = item.quantity * item.price;
+
+      const itemDiv = document.createElement('div');
+      itemDiv.innerHTML = `
+        <p>
+          <strong>${item.product_name}</strong> - ${item.price}円 × 
+          <input type="number" min="1" value="${item.quantity}" data-id="${item.id}" class="qty-input" style="width: 50px;">
+          = ${subtotal}円
+          <button data-id="${item.id}" class="delete-btn">削除</button>
+        </p>
+      `;
+
         cartItemsDiv.appendChild(itemDiv);
       });
 

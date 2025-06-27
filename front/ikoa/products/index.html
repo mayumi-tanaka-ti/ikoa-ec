@@ -20,10 +20,21 @@
     </main> -->
 
     <main>
-        <h2>カテゴリ一覧</h2>
-        <div id="category-buttons"></div>
-        <!-- <button onclick="location.href='../products/list.html?id=${category.id}'">詳細</button> -->
-    </main>
+    <h2>カテゴリ一覧</h2>
+
+    <!-- 検索と並び替え -->
+    <div style="margin-bottom: 1em;">
+        <input type="text" id="searchInput" placeholder="カテゴリ名を検索">
+        <select id="sortSelect">
+            <option value="asc">名前(昇順)</option>
+            <option value="desc">名前(降順)</option>
+        </select>
+    </div>
+
+    <!-- カテゴリボタン表示エリア -->
+    <div id="category-buttons"></div>
+</main>
+
 
     <script type="module" src="/src/js/ikoa/products/index.js"></script>
 </body>
