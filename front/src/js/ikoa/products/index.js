@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('category-buttons');
 
   try {
-    // カテゴリ一覧をAPIから取得（例: /api/user/categories）
+    // カテゴリ一覧をAPIから取得
     const response = await fetch('http://localhost:8000/api/user/products');
     if (!response.ok) throw new Error('カテゴリの取得に失敗しました');
 

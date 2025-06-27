@@ -13,60 +13,37 @@
         <div class="summary" id="cartSummary">
             <!-- カート内容をここに表示 -->
         </div>
+        <div style="margin-bottom:1em; font-weight:bold;">合計金額: <span id="orderTotal">0円</span></div>
         <form id="purchaseForm">
-            <label for="address">お届け先住所</label>
-            <input type="text" id="address" name="address" required>
+            <fieldset style="margin-bottom:1.5em;">
+                <legend>配送先情報</legend>
+                <label for="recipient">受取人氏名</label>
+                <input type="text" id="recipient" name="recipient" required>
+                <label for="postal">郵便番号</label>
+                <input type="text" id="postal" name="postal" required>
+                <label for="address">お届け先住所</label>
+                <input type="text" id="address" name="address" required>
+                <label for="phone">電話番号</label>
+                <input type="text" id="phone" name="phone" required>
+            </fieldset>
+            <fieldset style="margin-bottom:1.5em;">
+                <legend>カード情報</legend>
+                <label for="cardNumber">カード番号</label>
+                <input type="text" id="cardNumber" name="cardNumber" maxlength="16" required>
+                <label for="cardExp">有効期限 (MM/YY)</label>
+                <input type="text" id="cardExp" name="cardExp" maxlength="5" placeholder="MM/YY" required>
+                <label for="cardCvc">CVC</label>
+                <input type="text" id="cardCvc" name="cardCvc" maxlength="4" required>
+            </fieldset>
             <label for="note">備考</label>
             <textarea id="note" name="note" rows="2"></textarea>
             <button type="submit">購入を確定する</button>
         </form>
         <div id="result" style="margin-top:1em;color:green;"></div>
+        <div style="margin-top:2em;text-align:center;">
+            <a href="/ikoa/cart/purchase.html" id="backToCart" style="color:#007bff;text-decoration:underline;">カートに戻る</a>
+        </div>
     </div>
-    <script>
-    // カート内容を表示（例：localStorageやAPIから取得）
-    async function showCart() {
-        const token = localStorage.getItem('token');
-        const res = await fetch('/api/cart', {
-            headers: { 'Authorization': 'Bearer ' + token }
-        });
-        const data = await res.json();
-        const summary = document.getElementById('cartSummary');
-        if (Array.isArray(data) && data.length > 0) {
-            let html = '<ul>';
-            let total = 0;
-            data.forEach(item => {
-                html += `<li>${item.product ? item.product.name : ''} × ${item.quantity}：${item.amount_price}円</li>`;
-                total += Number(item.amount_price);
-            });
-            html += `</ul><strong>合計：${total}円</strong>`;
-            summary.innerHTML = html;
-        } else {
-            summary.innerHTML = 'カートに商品がありません。';
-        }
-    }
-    showCart();
-
-    document.getElementById('purchaseForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const address = document.getElementById('address').value;
-        const note = document.getElementById('note').value;
-        const token = localStorage.getItem('token');
-        const res = await fetch('/api/cart/purchase', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify({ address, note })
-        });
-        const data = await res.json();
-        if (res.ok) {
-            document.getElementById('result').textContent = '購入が完了しました。';
-            setTimeout(() => { window.location.href = 'complete.html'; }, 1500);
-        } else {
-            document.getElementById('result').textContent = data.message || 'エラーが発生しました';
-        }
-    });
-    </script>
+    <script type="module" src="/src/js/ikoa/cart/purchase.js"></script>
 </body>
 </html>

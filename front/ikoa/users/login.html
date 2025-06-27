@@ -32,6 +32,11 @@
       <h2>ログイン済み</h2>
       <p>ログインが完了しました。</p>
       <button id="logoutBtn">ログアウト</button>
+      <a href="../products/index.html">
+      <button>カテゴリ一覧</button>
+      </a>
+
+
     </div>
 
     <script type="module">
@@ -65,9 +70,8 @@
 
         try {
           const data = await apiClient.post('/login', loginData);
-          
           // token を保存
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.data.token);
           if (data.user) {
             localStorage.setItem('user', JSON.stringify(data.user));
           }
