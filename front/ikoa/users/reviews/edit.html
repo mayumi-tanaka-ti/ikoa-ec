@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レビュー編集</title>
+    <link rel="stylesheet" href="/src/css/create.css">
+</head>
+<body>
+    <div class="container">
+        <h1>レビュー編集</h1>
+        <form id="editReviewForm">
+            <div>
+                <label for="rating">評価（1〜5）</label>
+                <select id="rating" name="rating" required>
+                    <option value="">選択してください</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div>
+                <label for="comment">コメント</label>
+                <textarea id="comment" name="comment" rows="4" required></textarea>
+            </div>
+            <button type="submit">更新する</button>
+        </form>
+        <div id="result" style="margin-top:1em;color:green;"></div>
+        <div id="error" style="margin-top:1em;color:red;"></div>
+        <div style="margin-top:2em;text-align:center;">
+            <a href="/ikoa/users/mypage.html">マイページに戻る</a>
+        </div>
+    </div>
+    <script type="module" src="/src/js/ikoa/review/edit.js"></script>
+</body>
+</html>
