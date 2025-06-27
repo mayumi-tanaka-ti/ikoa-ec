@@ -36,7 +36,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-Route::apiResource('user/products', IkoaProductController::class);
 Route::get('/cart/complete/{order}', [CartController::class, 'complete']);
 
 Route::get('/user/products/list', [IkoaProductController::class, 'list']);
