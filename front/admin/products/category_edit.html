@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>カテゴリ編集</title>
+    <link rel="stylesheet" href="/src/css/category.css">
+</head>
+<body>
+    <h1>カテゴリ編集</h1>
+    <form id="category-edit-form">
+        <div>
+            <label>カテゴリ名: <input type="text" name="name" id="category-name" required></label>
+        </div>
+        <button type="submit">更新</button>
+        <button type="button" id="delete-category-btn" style="margin-left:1rem;">削除</button>
+    </form>
+    <div id="result"></div>
+    <script type="module" src="/src/js/admin/products/category_edit.js/"></script>
+    <a href="/admin/products/category.html">← 商品一覧に戻る</a>
+</body>
+</html>

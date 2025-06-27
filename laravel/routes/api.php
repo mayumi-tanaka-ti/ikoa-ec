@@ -20,11 +20,13 @@ Route::post('/admin_login',    [AuthController::class, 'adminLogin'])->name('api
 
 
 Route::middleware(['auth:sanctum','can:admin'])->group(function () {
+    Route::post('admin/products/{id}', [ProductController::class, 'update']);
     Route::apiResource('admin/products', ProductController::class);
-    Route::get('admin/products/category', [CategoryController::class, 'category']);
+    Route::get('admin/categories', [CategoryController::class, 'index']);
     Route::apiResource('admin/categories', CategoryController::class);
     Route::get('admin/history/{id}', [AdminController::class,'history']);
     Route::apiResource('admin/users', AdminController::class);
+    Route::get('/user/{id}', [AdminController::class, 'show']);
     Route::apiResource('admin/orders', OrderController::class);
 });
 

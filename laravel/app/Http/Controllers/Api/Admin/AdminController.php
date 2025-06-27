@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\UserResource;
 
 
 
@@ -16,7 +17,7 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::all();//すべてのユーザを取得
-        return response()->json($users);
+        return UserResource::collection($users);
     }
 
     /**
@@ -32,9 +33,13 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::with("orders")->findOrFail($id);//IDでユーザ取得,購入履歴も
-        return response()->json($user);
+    // IDでユーザを取得。見つからなければ404
+    $user = User::findOrFail($id);
+    
+    // すべてのカラムをJSONで返す（Laravelはモデルのfillable属性に従う）
+    return response()->json($user);
     }
+
 
     /**
      * Update the specified resource in storage.
