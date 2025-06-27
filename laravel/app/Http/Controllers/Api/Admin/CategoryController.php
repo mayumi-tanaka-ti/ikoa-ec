@@ -51,4 +51,16 @@ class CategoryController extends Controller
 
         return response()->json(null, 204);
     }
+
+    /**
+     * カテゴリ詳細取得
+     */
+    public function show($id)
+    {
+        $category = Category::find($id);
+        if (!$category) {
+            return response()->json(['message' => 'カテゴリが見つかりません'], 404);
+        }
+        return response()->json($category);
+    }
 }
