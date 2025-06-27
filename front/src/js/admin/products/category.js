@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         ul.className = 'product-list';
         for (const product of products) {
             const li = document.createElement('li');
-            li.textContent = product.name;
+            // 商品名をクリックで詳細画面へ遷移
+            li.innerHTML = `<a href="/admin/products/show.html?id=${product.id}">${product.name}</a>`;
             ul.appendChild(li);
         }
         catDiv.appendChild(ul);
