@@ -133,7 +133,7 @@ function setupEventListeners(product) {
     const writeReviewBtn = document.getElementById('write-review');
     if (writeReviewBtn) {
         writeReviewBtn.addEventListener('click', () => {
-            window.location.href = `/ikoa/review.html?id=${product.id}`;
+            window.location.href = `/ikoa/reviews/create.html?id=${product.id}`;
         });
     }
 }
