@@ -1,4 +1,5 @@
 // 購入手続き画面 purchase.html 用
+import { apiClient } from '../../utils/api.js'; 
 
 document.addEventListener('DOMContentLoaded', () => {
     showCart();
@@ -16,7 +17,7 @@ let cartItems = [];
 async function showCart() {
     const token = localStorage.getItem('token');
     console.log('Token:', token); // デバッグ用
-    const res = await fetch(`${apiBase}/api/cart`, {
+    const res = await apiClient.get(`/cart`, {
         headers: { 'Authorization': 'Bearer ' + token }
     });
     let data = {};

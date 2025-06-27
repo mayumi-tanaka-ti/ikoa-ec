@@ -23,7 +23,10 @@ class CartController extends Controller
      public function index(Request $request)
     {
         $userId = Auth::id();
-        $cart = Cart::where('user_id', $userId)->firstOrFail();
+        $cart = Cart::where('user_id', $userId)->first();
+        if (!$cart) {
+            $cart = Cart::create(['user_id' => $userId]);
+        }
         $items = $cart->cartProducts()->with('product')->get();
 
         return response()->json([
