@@ -64,6 +64,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'stock' => 'sometimes|required|integer',
             'category_id' => 'sometimes|required|exists:categories,id',
+            'is_visible' => 'sometimes|boolean', // ←追加
         ]);
 
         if ($request->hasFile('image_path')) {

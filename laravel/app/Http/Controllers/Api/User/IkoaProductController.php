@@ -26,7 +26,9 @@ class IkoaProductController extends Controller
      */
     public function list()
     {
-         $categories = Category::with('products')->get();
+         $categories = Category::with(['products' => function($query) {
+             $query->where('is_visible', 1);
+         }])->get();
 
         return response()->json($categories);
     }

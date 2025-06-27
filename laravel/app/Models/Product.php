@@ -15,6 +15,7 @@ class Product extends Model
                            'description',
                            'stock',
                            'category_id',
+                           'is_visible', //表示・非表示
                           ];
     
  

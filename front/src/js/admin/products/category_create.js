@@ -27,7 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     : '登録失敗: ' + (res.data?.message || JSON.stringify(res.data?.errors) || '');
                 if (isSuccess) form.reset();
             } catch (err) {
-                document.getElementById('result').textContent = '通信エラー';
+                // サーバーからのエラー内容も表示
+                console.error(err); // ← 追加: エラー詳細をコンソールに出力
+                let msg = '通信エラー';
+                if (err.response) {
+                    msg = 'サーバーエラー: ' + (err.response.data?.message || JSON.stringify(err.response.data?.errors) || err.response.statusText || '');
+                }
+                document.getElementById('result').textContent = msg;
             }
             btn.disabled = false;
         });

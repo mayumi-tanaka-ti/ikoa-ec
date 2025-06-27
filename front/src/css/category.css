@@ -15,3 +15,7 @@ ul.product-list li { margin-bottom: 0.3rem; }
 }
 .add-category-btn { background: #1976d2; }
 .add-product-btn:hover, .add-category-btn:hover { filter: brightness(0.9); }
+
+.hidden {
+  display: none !important;
+}
