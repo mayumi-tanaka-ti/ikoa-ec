@@ -40,7 +40,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         const ul = document.createElement('ul');
         category.products.forEach(product => {
             const li = document.createElement('li');
+
+            const imageUrl = product.image_path
+                ? `http://localhost:8000/storage/product_images/${product.image_path}`
+                : 'https://via.placeholder.com/150';
+
+            
             li.innerHTML = `
+                <img src="${imageUrl}" alt="${product.name}" style="width: 150px; height: auto;"><br>
                 <strong>${product.name}</strong><br>
                 価格: ${product.price} 円<br>
                 <a href="/ikoa/products/show.html?id=${product.id}">詳細を見る</a>
