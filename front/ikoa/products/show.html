@@ -1,31 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>詳細</title>
-
+    <title>商品詳細 - IKOA</title>
+    <link rel="stylesheet" href="../../src/css/productShow.css">
 </head>
 <body>
-    <nav>
-        <a href="/ikoa/products/index.html">カテゴリ一覧</a>
-        <a href="/ikoa/products/mypage.html">マイページ</a>
-        <a href="/ikoa/products/favorite.html">お気に入り</a>
-        <a href="/ikoa/products/cart.html">カート</a>
-
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">IKOA</div>
+            <div class="nav-links">
+                <a href="/ikoa/products/index.html" class="nav-link">カテゴリ一覧</a>
+                <a href="/ikoa/products/mypage.html" class="nav-link">マイページ</a>
+                <a href="/ikoa/products/favorite.html" class="nav-link">お気に入り</a>
+                <a href="/ikoa/products/cart.html" class="nav-link cart-link">
+                    <span>カート</span>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
     </nav>
 
-    <main>
-        <h1>詳細表示</h1>
-        <div id="product-show">
-            <p>読み込み中・・・</p>
-        </div>
-        <div>
-            <a href="/ikoa/products/index.html">一覧へ戻る</a>
+    <main class="main-content">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="/ikoa/products/index.html">商品一覧</a>
+                <span>></span>
+                <span>商品詳細</span>
+            </nav>
+
+            <div class="product-detail-container">
+                <div id="product-show" class="product-detail">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>読み込み中...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back-link">
+                <a href="/ikoa/products/index.html" class="btn btn-secondary">
+                    ← 一覧へ戻る
+                </a>
+            </div>
         </div>
     </main>
 
-    <script type="module" src="/src/js/ikoa/products/show.js"></script>
-    
+    <!-- Toast notification -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <span class="toast-icon">✓</span>
+            <span class="toast-message">カートに追加しました</span>
+        </div>
+    </div>
+
+    <script type="module" src="../../src/js/ikoa/products/show.js"></script>
 </body>
 </html>
