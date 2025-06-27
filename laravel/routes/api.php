@@ -26,7 +26,7 @@ Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::apiResource('admin/categories', CategoryController::class);
     Route::get('admin/history/{id}', [AdminController::class,'history']);
     Route::apiResource('admin/users', AdminController::class);
-    Route::get('/user/{id}', [AdminController::class, 'show']);
+    Route::get('admin/user/{id}', [AdminController::class, 'show']);
     Route::apiResource('admin/orders', OrderController::class);
 });
 
