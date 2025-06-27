@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>購入履歴画面</title>
+  <meta charset="UTF-8" />
+  <title>購入履歴</title>
+  <style>
+    .info-row { margin-bottom: 10px; }
+    .product { margin-left: 20px; }
+  </style>
 </head>
 <body>
-    <h1>購入履歴一覧</h1>
-    
+  <h1>購入履歴</h1>
+  <div id="error-message" style="display:none; color:red;"></div>
+  <div id="user-history"></div>
+
+  <script type="module" src="../../src/js/admin/users/history.js"></script>
 </body>
-</html>l
+</html>
