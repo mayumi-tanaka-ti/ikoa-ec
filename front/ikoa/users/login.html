@@ -71,7 +71,7 @@
         try {
           const data = await apiClient.post('/login', loginData);
           // token を保存
-          localStorage.setItem('token', data.token);
+          localStorage.setItem('token', data.data.token);
           if (data.user) {
             localStorage.setItem('user', JSON.stringify(data.user));
           }
