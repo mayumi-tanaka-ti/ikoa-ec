@@ -85,9 +85,9 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $review_id)
     {
-        $review = Review::findOrFail($id);
+        $review = Review::findOrFail($review_id);
         // 本人のみ削除可
         if ($review->user_id !== Auth::id()) {
             return response()->json(['message' => '権限がありません'], 403);
