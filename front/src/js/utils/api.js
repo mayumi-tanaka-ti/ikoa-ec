@@ -7,17 +7,18 @@ export const apiClient = {
             headers: {
                 'Authorization': token ? `Bearer ${token}` : '',
                 'Content-Type': 'application/json',
-                'Accept': 'application/json', // 追加
+                'Accept': 'application/json',
             }
         })
         
         const data = await response.json()
         
         if (!response.ok) {
-            throw {status: response.status || "a", data: data};
+            const error = {status: response.status, data: data}
+            throw error;
         }
         
-        return  {status: response.status || "a", data: data};
+        return {status: response.status, data: data};
     },
     
     async post(endpoint, data) {
@@ -28,7 +29,7 @@ export const apiClient = {
         
         const headers = {
             'Authorization': token ? `Bearer ${token}` : '',
-            'Accept': 'application/json', // 追加
+            'Accept': 'application/json',
         }
         
         // FormData の場合は Content-Type を設定しない（ブラウザが自動設定）
@@ -45,10 +46,14 @@ export const apiClient = {
         const responseData = await response.json()
         
         if (!response.ok) {
-            throw responseData
+            const error = {status: response.status, data: responseData}
+            throw error;
         }
         
-        return {status: response.status || "a", data: data};
+        return {
+            status: response.status,
+            data: responseData
+        };
     },
     
     async put(endpoint, data) {
@@ -58,7 +63,7 @@ export const apiClient = {
         
         const headers = {
             'Authorization': token ? `Bearer ${token}` : '',
-            'Accept': 'application/json', // 追加
+            'Accept': 'application/json',
         }
         
         if (!isFormData) {
@@ -74,10 +79,14 @@ export const apiClient = {
         const responseData = await response.json()
         
         if (!response.ok) {
-            throw responseData
+            const error = {status: response.status, data: responseData}
+            throw error;
         }
         
-        return responseData
+        return {
+            status: response.status,
+            data: responseData
+        };
     },
     
     async patch(endpoint, data) {
@@ -109,16 +118,20 @@ export const apiClient = {
             headers: {
                 'Authorization': token ? `Bearer ${token}` : '',
                 'Content-Type': 'application/json',
-                'Accept': 'application/json', // 追加
+                'Accept': 'application/json',
             }
         })
         
         const responseData = await response.json()
         
         if (!response.ok) {
-            throw responseData
+            const error = {status: response.status, data: responseData}
+            throw error;
         }
         
-        return responseData
+        return {
+            status: response.status,
+            data: responseData
+        };
     }
 }

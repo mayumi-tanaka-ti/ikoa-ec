@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const response = await apiClient.get(`/admin/history/${userId}`)
     console.log('API response:', response)
 
-    const { user, orders } = response
+    const { user, orders } = response.data
     let html = ''
 
     if (orders.length === 0) {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div>商品名：${product.name}</div>
             <div>価格：${product.pivot.price}円</div>
             <div>数量：${product.pivot.quantity}</div>
-            <div><img src="${product.image_path}" width="100" /></div>
+            <div><img src="http://localhost:8000/storage/${product.image_path}" width="300" /></div>
           </div>
           <hr>`
         })
