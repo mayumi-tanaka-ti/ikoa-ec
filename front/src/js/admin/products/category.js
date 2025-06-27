@@ -23,8 +23,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         ul.className = 'product-list';
         for (const product of products) {
             const li = document.createElement('li');
-            // 商品名をクリックで詳細画面へ遷移
             li.innerHTML = `<a href="/admin/products/show.html?id=${product.id}">${product.name}</a>`;
+            // 表示/非表示ボタン
+            const toggleBtn = document.createElement('button');
+            toggleBtn.textContent = product.is_visible ? '非表示にする' : '表示にする';
+            toggleBtn.className = 'toggle-visible-btn';
+            toggleBtn.addEventListener('click', async () => {
+                toggleBtn.disabled = true;
+                try {
+                    // PATCHでis_visibleをトグル
+                    const newVisible = product.is_visible ? 0 : 1;
+                    const res = await apiClient.patch(`/admin/products/${product.id}`, { is_visible: newVisible });
+                    if (res.status >= 200 && res.status < 300) {
+                        product.is_visible = newVisible;
+                        toggleBtn.textContent = newVisible ? '非表示にする' : '表示にする';
+                    } else {
+                        alert('更新失敗: ' + (res.data?.message || ''));
+                    }
+                } catch (err) {
+                    alert('通信エラー: ' + (err.response?.data?.message || err.message));
+                }
+                toggleBtn.disabled = false;
+            });
+            li.appendChild(toggleBtn);
             ul.appendChild(li);
         }
         catDiv.appendChild(ul);

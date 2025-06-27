@@ -80,6 +80,28 @@ export const apiClient = {
         return responseData
     },
     
+    async patch(endpoint, data) {
+        const token = localStorage.getItem('token')
+        const isFormData = data instanceof FormData
+        const headers = {
+            'Authorization': token ? `Bearer ${token}` : '',
+            'Accept': 'application/json',
+        }
+        if (!isFormData) {
+            headers['Content-Type'] = 'application/json'
+        }
+        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+            method: 'PATCH',
+            headers,
+            body: isFormData ? data : JSON.stringify(data)
+        })
+        const responseData = await response.json()
+        if (!response.ok) {
+            throw {status: response.status || "a", data: responseData};
+        }
+        return {status: response.status || "a", data: responseData};
+    },
+    
     async delete(endpoint) {
         const token = localStorage.getItem('token')
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
