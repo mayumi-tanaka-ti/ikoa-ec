@@ -41,9 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         category.products.forEach(product => {
             const li = document.createElement('li');
 
-            const imageUrl = product.image_path
-                ? `http://localhost:8000/storage/product_images/${product.image_path}`
-                : 'https://via.placeholder.com/150';
+            const imageUrl = `http://localhost:8000/storage/${product.image_path}`;
 
             
             li.innerHTML = `
@@ -62,5 +60,3 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('商品一覧取得エラー:', error);
     }
 });
-
-
