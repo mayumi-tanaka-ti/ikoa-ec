@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ</title>
+    <link rel="stylesheet" href="/src/css/mypage.css">
+</head>
+<body>
+    <div class="container">
+        <h1>マイページ</h1>
+        <form id="mypageForm">
+            <div class="info">
+                <label for="name">名前</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit">情報を更新</button>
+        </form>
+        <div id="result" style="margin-top:1em;color:green;"></div>
+        <div class="links">
+            <a href="/ikoa/products">ホーム</a>
+            <a href="history.html">購入履歴</a>
+            <a href="create.html">レビューを書く</a>
+        </div>
+    </div>
+    <script>
+    async function fetchMypage() {
+        const token = localStorage.getItem('token');
+        const res = await fetch('/api/user/mypage', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        document.getElementById('name').value = data.name || '';
+        document.getElementById('email').value = data.email || '';
+    }
+    fetchMypage();
+
+    document.getElementById('mypageForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const token = localStorage.getItem('token');
+        const res = await fetch('/api/user/mypage', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({ name, email })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            document.getElementById('result').textContent = '情報を更新しました';
+        } else {
+            document.getElementById('result').textContent = data.message || 'エラーが発生しました';
+        }
+    });
+    </script>
+</body>
+</html>
