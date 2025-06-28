@@ -26,7 +26,9 @@ Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::apiResource('admin/categories', CategoryController::class);
     Route::get('admin/history/{id}', [AdminController::class,'history']);
     Route::apiResource('admin/users', AdminController::class);
-    Route::apiResource('admin/orders', OrderController::class);
+    Route::get('admin/user/{id}', [AdminController::class, 'show']);
+    Route::get('/admin/orders/monthly', [OrderController::class, 'monthlySales']);
+    Route::get('/admin/orders/daily', [OrderController::class, 'dailySales']);
 });
 
 //ユーザー側-----
@@ -46,8 +48,8 @@ Route::get('/reviews/index', [ReviewController::class,'index']);
 Route::middleware(['auth:sanctum','can:user'])->group(function () {
     Route::get('/reviews/create/{id}', [ReviewController::class, 'create']);
     Route::post('/reviews/store/{id}', [ReviewController::class, 'store']);
-    Route::patch('/reviews/update/{product_id}/{review_id}', [ReviewController::class, 'update']);
-    Route::delete('/reviews/delete/{product_id}/{review_id}', [ReviewController::class, 'destroy']);
+    Route::patch('/reviews/update/{review_id}', [ReviewController::class, 'update']);
+    Route::delete('/reviews/delete/{review_id}', [ReviewController::class, 'destroy']);
     Route::get('user/mypage', [UserController::class, 'mypage']);
     Route::put('user/mypage', [UserController::class, 'update']);
     Route::post('cart/purchase', [CartController::class, 'purchase']);

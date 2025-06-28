@@ -5,39 +5,39 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
-use App\Models\OrderProduct;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function index()
+    /**
+     * 月別売上を取得
+     */
+    public function monthlySales()
     {
+        $monthlySales = Order::select(
+                DB::raw("DATE_FORMAT(order_date, '%Y-%m') as month"),
+                DB::raw("SUM(total_price) as total")
+            )
+            ->groupBy('month')
+            ->orderBy('month', 'desc')
+            ->get();
 
-        // 注文と注文商品をまとめて取得
-        $orders = Order::with('order_products.product')->get();
-        return response()->json($orders);
-    }
-
-    public function update(Request $request, string $id)
-    {
-        $order = Order::findOrFail($id);
-
-        $validated = $request->validate([
-            // 例: 'status' => 'required|string', 'shipping_address' => 'nullable|string', など
-            'status' => 'sometimes|required|string',
-            'shipping_address' => 'nullable|string',
-            // 必要な項目を追加
-        ]);
-
-        $order->update($validated);
-
-        return response()->json($order);
+        return response()->json($monthlySales);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 日別売上を取得
      */
-    public function destroy(string $id)
+    public function dailySales()
     {
-        //
+        $dailySales = Order::select(
+                DB::raw("DATE(order_date) as date"),
+                DB::raw("SUM(total_price) as total")
+            )
+            ->groupBy('date')
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return response()->json($dailySales);
     }
 }
