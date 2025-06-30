@@ -46,8 +46,8 @@ Route::apiResource('user/products', IkoaProductController::class);
 Route::get('/reviews/index', [ReviewController::class,'index']);
 
 Route::middleware(['auth:sanctum','can:user'])->group(function () {
-    Route::get('/reviews/create/{id}', [ReviewController::class, 'create']);
-    Route::post('/reviews/store/{id}', [ReviewController::class, 'store']);
+    Route::get('/reviews/create/{product_id}', [ReviewController::class, 'create']);
+    Route::post('/reviews/store/{product_id}', [ReviewController::class, 'store']);
     Route::patch('/reviews/update/{review_id}', [ReviewController::class, 'update']);
     Route::delete('/reviews/delete/{review_id}', [ReviewController::class, 'destroy']);
     Route::get('user/mypage', [UserController::class, 'mypage']);

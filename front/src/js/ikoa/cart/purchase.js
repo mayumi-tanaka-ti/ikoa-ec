@@ -26,21 +26,29 @@ async function showCart() {
         document.getElementById('cartSummary').textContent = 'カート情報の取得に失敗しました';
         return;
     }
-    const summary = document.getElementById('cartSummary');
-    cartItems = data.items || [];
-    if (cartItems.length > 0) {
-        let html = '<ul>';
-        let total = 0;
-        cartItems.forEach(item => {
-            html += `<li>${item.product ? item.product.name : ''} × ${item.quantity}：${item.amount_price}円</li>`;
-            total += Number(item.amount_price);
+    const cartItemsDiv = document.getElementById('cartSummary');
+    const totalPriceSpan = document.getElementById('orderTotal');
+
+    cartItemsDiv.innerHTML = '';
+    let total = 0;
+    if (data.items && data.items.length > 0) {
+        data.items.forEach(item => {
+            const subtotal = item.quantity * item.price;
+            total += subtotal;
+            const itemDiv = document.createElement('div');
+            itemDiv.innerHTML = `
+                <p>
+                  <strong>${item.product_name}</strong> - ${item.price}円 × 
+                  <input type="number" min="1" value="${item.quantity}" data-id="${item.id}" class="qty-input" style="width: 50px;">
+                  = ${subtotal}円
+                </p>
+            `;
+            cartItemsDiv.appendChild(itemDiv);
         });
-        html += `</ul><strong>合計：${total}円</strong>`;
-        summary.innerHTML = html;
-        document.getElementById('orderTotal').textContent = total + '円';
+        totalPriceSpan.textContent = total + '円';
     } else {
-        summary.innerHTML = 'カートに商品がありません。';
-        document.getElementById('orderTotal').textContent = '0円';
+        cartItemsDiv.innerHTML = 'カートに商品がありません。';
+        totalPriceSpan.textContent = '0円';
     }
 }
 
