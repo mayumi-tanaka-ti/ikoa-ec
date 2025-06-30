@@ -46,20 +46,31 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('cart-item');
+        // itemDiv.innerHTML = `
+        //   <p>
+        //     <strong>${item.product_name}</strong> - ${item.price}円 × 
+        //     <input type="number" min="1" value="${item.quantity}" data-id="${item.product_id}" class="qty-input">
+        //     = ${subtotal}円
+        //     <button data-id="${item.product_id}" class="delete-btn">削除</button>
+        //   </p>
+        // `;
+
         itemDiv.innerHTML = `
           <p>
             <strong>${item.product_name}</strong> - ${item.price}円 × 
-            <input type="number" min="1" value="${item.quantity}" data-id="${item.product_id}" class="qty-input">
+            <input type="number" min="1" value="${item.quantity}" data-cartproduct="${item.id}" data-id="${item.product_id}" class="qty-input">
             = ${subtotal}円
-            <button data-id="${item.product_id}" class="delete-btn">削除</button>
+            <button data-cartproduct="${item.id}" data-id="${item.product_id}" class="delete-btn">削除</button>
           </p>
         `;
+
         cartItemsDiv.appendChild(itemDiv);
       });
 
       totalPriceSpan.textContent = data.total;
 
       attachEvents(); // 数量変更・削除ボタンイベント登録
+
 
     } catch (error) {
       cartItemsDiv.innerHTML = `<p class="cart-empty">エラー: ${error.message}</p>`;
@@ -75,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('.qty-input').forEach(input => {
       input.addEventListener('change', async (e) => {
         const newQty = parseInt(e.target.value, 10);
-        const cartProductId = e.target.dataset.id;
+        const cartProductId = e.target.dataset.cartproduct;
 
         if (newQty < 1) {
           alert('数量は1以上で入力してください');
