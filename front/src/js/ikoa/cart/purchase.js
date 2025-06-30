@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('purchaseForm').addEventListener('submit', handlePurchase);
     document.getElementById('backToCart').addEventListener('click', function(e) {
         e.preventDefault();
-        window.location.href = '/ikoa/cart/purchase.html'; // カート画面のパスに合わせて修正
+        window.location.href = '/ikoa/cart/cart.html'; // カート画面のパスに合わせて修正
     });
 });
 
