@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ユーザ詳細情報</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーザ詳細情報</title>
+  <link rel="stylesheet" href="/src/css/admin/style.css">
 </head>
 <body>
-    <main>
-        <h1>ユーザ詳細情報</h1>
-        <div id="error-message"></div>
-        <div id="loading-message">読み込み中…</div>
+  <main class="user-detail-container">
+    <h1>👤 ユーザ詳細情報</h1>
 
-        <div id="user-details"></div>
-    </main>
-    
-    <script type="module" src="../../src/js/admin/users/show.js"></script>
+    <div id="error-message" class="message error-message"></div>
+    <div id="loading-message" class="message loading-message">読み込み中…</div>
+
+    <div id="user-details" class="user-detail-box"></div>
+  </main>
+
+  <script type="module" src="../../src/js/admin/users/show.js"></script>
 </body>
 </html>

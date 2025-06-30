@@ -169,3 +169,120 @@ h2 {
   word-wrap: break-word;
   color: #333;
 }
+
+/* コンテナ全体を画面いっぱいに */
+.user-detail-container {
+  width: 100%;
+  max-width: none;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 0; /* カード感をなくすなら */
+  box-shadow: none; /* 影をなくすなら */
+}
+
+/* タイトル中央 */
+.user-detail-container h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* メッセージ中央 */
+.message {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.error-message {
+  color: #d32f2f;
+}
+
+.loading-message {
+  color: #555;
+}
+
+/* 詳細データの背景と整形 */
+.user-detail-box {
+  background-color: #f1f5fb;
+  padding: 20px;
+  border-radius: 0;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #333;
+}
+
+/* 全体レイアウト */
+.history-container {
+  width: 100%;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+}
+
+/* タイトル */
+.history-container h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* エラーメッセージ */
+.message {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.error-message {
+  color: red;
+}
+
+/* 購入履歴データのボックス */
+.history-box {
+  background-color: #f1f5fb;
+  padding: 20px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #333;
+  border-radius: 8px;
+}
+
+/* 履歴の項目ごとのマージン調整 */
+.info-row {
+  margin-bottom: 12px;
+}
+
+/* 商品情報のインデント表示 */
+.product {
+  margin-left: 20px;
+}
+
+/* 戻るボタン用スタイル */
+.back-link {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ccc;
+  color: #333;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+  background-color: #aaa;
+  transform: translateY(-2px);
+}
