@@ -1,6 +1,14 @@
 import { apiClient } from "../../utils/api.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+    // トークンの確認
+    const token = localStorage.getItem('token');
+    if (!token) {
+        document.getElementById('message').textContent = 'ログインが必要です';
+        return;
+    }
+
     // カテゴリと全商品を最初にまとめて取得
     const [catRes, prodRes] = await Promise.all([
         apiClient.get('/admin/categories'),
