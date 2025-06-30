@@ -15,15 +15,11 @@ class CategorySeeder extends Seeder
     {
         // DB::table('<対象テーブル名>')->insert([<カラム名> => <値>]);
         DB::table('categories')->insert([
-            [
-                'name' => 'ベッド',
-            ],
-            [
-                'name' => 'ソファ',
-            ],
-            [
-                'name' => 'ラグ・カーペット',
-            ],
+            ['name' => 'ベッド'],
+            ['name' => 'ソファ'],
+            ['name' => 'ラグ・カーペット'],
+            ['name' => 'テーブル'],
+            ['name' => '収納家具'],
         ]);
     }
 }

@@ -2,36 +2,35 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class CartProductSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-         DB::table('cart_product')->insert([
-            [
-                'cart_id' => 1,
-                'product_id' => 1, // ソファ商品ID例
-                'quantity' => 1,
-                'amount_price' => 79800,
-            ],
-             [
-                'cart_id' => 1,
-                'product_id' => 3,       // ラグの商品ID例
-                'quantity' => 1,
-                'amount_price' => 2999,
-            ],
-            [
-                'cart_id' => 2,
-                'product_id' => 2,       // ベッドの商品ID例
-                'quantity' => 1,
-                'amount_price' => 39900,
-            ],
-        ]);
+        $carts = DB::table('carts')->get();
+        $products = DB::table('products')->get();
+
+        foreach ($carts as $cart) {
+            // 0〜5個のカート商品数をランダム決定
+            $count = rand(0, 5);
+
+            // 商品をシャッフルして重複なしで取得
+            $shuffledProducts = $products->shuffle()->take($count);
+
+            foreach ($shuffledProducts as $product) {
+                $quantity = rand(1, 3);
+                $amount_price = $product->price * $quantity;
+
+                DB::table('cart_product')->insert([
+                    'cart_id' => $cart->id,
+                    'product_id' => $product->id,
+                    'quantity' => $quantity,
+                    'amount_price' => $amount_price,
+                ]);
+            }
+        }
     }
 }
+

@@ -4,10 +4,22 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>マイページ編集</title>
-<link rel="stylesheet" href="/src/css/mypage.css" />
+<link rel="stylesheet" href="/src/css/ikoa/mypage_edit.css" />
 </head>
 <body>
+ <nav class="navbar">
+  <div class="nav-container">
+    <a href="/ikoa/products/index.html" class="nav-brand">IKO家具</a>
+    <div class="nav-links">
+      <a href="/ikoa/products/index.html" class="nav-link">カテゴリ一覧</a>
+      <a href="/ikoa/products/favorite.html" class="nav-link">お気に入り</a>
+      <a href="/ikoa/cart/cart.html" class="nav-link">カート</a>
+    </div>
+  </div>
+</nav>
+
 <div class="container">
+
     <h1>マイページ編集</h1>
     <form id="mypageForm" enctype="application/json">
         <div class="info">
@@ -24,7 +36,7 @@
     </form>
     <div id="result" style="margin-top:1em;color:green;"></div>
     <div class="links">
-        <a href="/ikoa/products/index">ホーム</a>
+        <a href="/ikoa/users/mypage.html">マイページ</a>
         <a href="history.html">購入履歴</a>
         <a href="/ikoa/reviews/create.html">レビューを書く</a>
     </div>

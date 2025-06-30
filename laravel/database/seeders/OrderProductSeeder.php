@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Order;
 use App\Models\Product;
@@ -15,25 +14,39 @@ class OrderProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $orders = Order::all();
         $products = Product::all();
-
+        $orders = Order::all();
 
         $count = 0;
-        while ($count < 1000) {
+        $target = 1000;
+
         foreach ($orders as $order) {
-            foreach ($products as $product) {
-                OrderProduct::factory()->create([
+            // 注文ごとに1～5商品をランダムに追加
+            $selectedProducts = $products->random(rand(1, 5));
+            $total = 0;
+
+            foreach ($selectedProducts as $product) {
+                if ($count >= $target) break 2;
+
+                $quantity = rand(1, 5);
+                $price = $product->price;
+
+                OrderProduct::create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
-                    'quantity' => fake()->numberBetween(1, 5),
-                    'price' => fake()->numberBetween(1000, 100000), // 価格
+                    'quantity' => $quantity,
+                    'price' => $price,
                 ]);
+
+                $total += $price * $quantity;
                 $count++;
-                if ($count >= 1000) {
-                    break 3;
-                }
             }
-        }}
+
+            // 合計金額更新
+            $order->update(['total_price' => $total]);
+        }
+
+        echo "🔢 合計作成数: {$count}件の order_product レコードが作成されました。\n";
     }
 }
+
