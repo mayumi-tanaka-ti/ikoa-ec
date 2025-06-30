@@ -4,30 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>カート</title>
+  <link rel="stylesheet" href="/src/css/ikoa/cart.css">
+
 </head>
 <body>
-  <nav>
-    <a href="/ikoa/products/index.html">カテゴリ一覧</a>
-    <a href="/ikoa/products/mypage.html">マイページ</a>
-    <a href="/ikoa/products/favorite.html">お気に入り</a>
-  </nav>
-
-  <main>
-    <h1>カート</h1>
-
-    <div id="cart-items">
-      <p>読み込み中...</p>
+  <nav class="navbar">
+  <div class="nav-container">
+    <a href="/ikoa/products/index.html" class="nav-brand">IKO家具</a>
+    <div class="nav-links">
+      <a href="/ikoa/products/index.html" class="nav-link">カテゴリ一覧</a>
+      <a href="/ikoa/users/mypage.html" class="nav-link">マイページ</a>
+      <a href="/ikoa/products/favorite.html" class="nav-link">お気に入り</a>
+      <a href="/ikoa/cart/cart.html" class="nav-link cart-link">
+        カート <span class="cart-count" id="cart-count">0</span>
+      </a>
     </div>
+  </div>
+</nav>
 
-    <div>
-      <strong>合計:</strong> <span id="total-price">0</span> 円
-    </div>
+  <main class="main-content">
+    <div class="container">
+      <h1 class="product-title">カート</h1>
 
-    <div>
-      <button id="purchase-btn">購入手続きへ</button>
+      <div class="cart-container">
+        <div id="cart-items">
+          <p class="cart-empty">読み込み中...</p>
+        </div>
+
+        <div class="cart-summary">
+          合計: <span id="total-price">0</span> 円
+        </div>
+
+        <button id="purchase-btn" class="purchase-btn">購入手続きへ</button>
+      </div>
     </div>
   </main>
 
   <script type="module" src="/src/js/ikoa/cart/cart.js"></script>
 </body>
+
 </html>

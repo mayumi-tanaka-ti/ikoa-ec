@@ -2,21 +2,20 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
 
 class UsersSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        $faker = Faker::create('ja_JP');
+
         DB::table('users')->insert([
-            // 管理者ユーザー 1
+            // オーナー2名
             [
                 'name' => '店舗オーナー A',
                 'gender' => '男性',
@@ -29,10 +28,8 @@ class UsersSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'is_admin' => true,
-                'role'=> true,//管理者
+                'role' => true,
             ],
-
-            // 管理者ユーザー 2
             [
                 'name' => '店舗オーナー B',
                 'gender' => '女性',
@@ -45,10 +42,10 @@ class UsersSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'is_admin' => true,
-                'role'=> true,//管理者
+                'role' => true,
             ],
 
-            // 一般ユーザー 1
+            // 既存一般ユーザー2名
             [
                 'name' => '田中 一郎',
                 'gender' => '男性',
@@ -61,9 +58,8 @@ class UsersSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'is_admin' => false,
-                'role'=> false,//利用者
+                'role' => false,
             ],
-            // 一般ユーザー 2
             [
                 'name' => '鈴木 花子',
                 'gender' => '女性',
@@ -76,9 +72,31 @@ class UsersSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'is_admin' => false,
-                'role'=> false,//利用者
+                'role' => false,
             ],
         ]);
 
+        // ここから21名分の追加ユーザー生成
+        $users = [];
+        for ($i = 0; $i < 21; $i++) {
+            $gender = $faker->randomElement(['男性', '女性']);
+            $users[] = [
+                'name' => $faker->name($gender === '男性' ? 'male' : 'female'),
+                'gender' => $gender,
+                'birthday' => $faker->date('Y-m-d', '2004-01-01'), // 18歳以上に設定
+                'phone_number' => $faker->phoneNumber(),
+                'post_code' => $faker->postcode(),
+                'address' => $faker->address(),
+                'email' => $faker->unique()->safeEmail(),
+                'password' => Hash::make('userpass'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'is_admin' => false,
+                'role' => false,
+            ];
+        }
+
+        DB::table('users')->insert($users);
     }
 }
+

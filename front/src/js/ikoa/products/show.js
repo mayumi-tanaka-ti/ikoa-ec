@@ -2,10 +2,12 @@ import { apiClient } from "../../utils/api.js";
 
 
 // script.js
+let currentUserId = null;
+
 document.addEventListener('DOMContentLoaded', async () => {
     const detailContainer = document.getElementById('product-show');
     const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
+    const id = params.get('id') || params.get('product_id');
 
     // カート数の初期化
     updateCartCount();
@@ -13,6 +15,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!id) {
         showError('商品が指定されていません');
         return;
+    }
+
+    // ログインユーザーID取得
+    try {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const userRes = await apiClient.get('/user', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+            currentUserId = userRes.data.id;
+        }
+    } catch (e) {
+        currentUserId = null;
     }
 
     try {
@@ -44,11 +59,12 @@ async function loadProductDetail(id) {
 
 function renderProductDetail(product) {
     const detailContainer = document.getElementById('product-show');
-    
+    const imageUrl = `http://localhost:8000/storage/${product.image_path}`;
     const productHTML = `
         <div class="product-header">
             <div class="product-image">
-                <img src="${product.image || '/images/no-image.png'}" alt="${product.name}">
+                <img src="http://localhost:8000/storage/${product.image_path || '/images/no-image.png'}" alt="${product.name}">
+
             </div>
             <div class="product-info">
                 <h1 class="product-title">${escapeHtml(product.name)}</h1>
@@ -90,9 +106,8 @@ function renderReviews(reviews) {
     if (!reviews || reviews.length === 0) {
         return '<div class="no-reviews"><p>レビューはまだありません。</p></div>';
     }
-
     const reviewsHTML = reviews.map(review => `
-        <div class="review-item">
+        <div class="review-item" data-review-id="${review.id}">
             <div class="review-header">
                 <div class="reviewer-info">
                     <strong class="reviewer-name">${escapeHtml(review.user_name)}</strong>
@@ -105,9 +120,14 @@ function renderReviews(reviews) {
             <div class="review-content">
                 <p>${escapeHtml(review.comment)}</p>
             </div>
+            ${currentUserId && review.user_id === currentUserId ? `
+                <div class="review-actions">
+                    <button class="btn-edit-review" data-review-id="${review.id}">編集</button>
+                    <button class="btn-delete-review" data-review-id="${review.id}">削除</button>
+                </div>
+            ` : ''}
         </div>
     `).join('');
-
     return `<div class="reviews-list">${reviewsHTML}</div>`;
 }
 
@@ -133,9 +153,38 @@ function setupEventListeners(product) {
     const writeReviewBtn = document.getElementById('write-review');
     if (writeReviewBtn) {
         writeReviewBtn.addEventListener('click', () => {
-            window.location.href = `/ikoa/reviews/create.html?id=${product.id}`;
+            window.location.href = `/ikoa/reviews/create.html?product_id=${product.id}`;
         });
     }
+
+    setTimeout(() => {
+        document.querySelectorAll('.btn-edit-review').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const reviewId = btn.getAttribute('data-review-id');
+                window.location.href = `/ikoa/reviews/edit.html?reviewId=${reviewId}`;
+            });
+        });
+        document.querySelectorAll('.btn-delete-review').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const reviewId = btn.getAttribute('data-review-id');
+                if (!confirm('本当にこのレビューを削除しますか？')) return;
+                try {
+                    const token = localStorage.getItem('token');
+                    const res = await apiClient.delete(`/reviews/delete/${reviewId}`, {
+                        headers: { 'Authorization': 'Bearer ' + token }
+                    });
+                    if (res.status === 200) {
+                        showToast('レビューを削除しました');
+                        await loadProductDetail(product.id);
+                    } else {
+                        showToast('削除に失敗しました', 'error');
+                    }
+                } catch (err) {
+                    showToast('削除に失敗しました', 'error');
+                }
+            });
+        });
+    }, 0);
 }
 
 async function addToCart(product, quantity) {

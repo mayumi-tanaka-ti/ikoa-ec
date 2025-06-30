@@ -64,7 +64,7 @@
         };
 
         try {
-          const response = await apiClient.post('/login', loginData);
+          const response = await apiClient.post('/admin_login', loginData);
           
           // token を保存
           localStorage.setItem('token', response.data.token);

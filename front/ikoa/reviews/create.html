@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レビュー投稿</title>
-     <link rel="stylesheet" href="/src/css/create.css">
+     <link rel="stylesheet" href="/src/css/ikoa/create.css">
 </head>
 <body>
     <div class="container">
@@ -38,7 +38,7 @@
     const apiBase = 'http://localhost:8000';
     // URLパラメータからproduct_idを取得し、フォームにセット
     const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('product_id');
+    const productId = urlParams.get('product_id') || urlParams.get('id');
     if (productId) {
         document.getElementById('product_id').value = productId;
         document.getElementById('toProductDetail').href = `/ikoa/products/show.html?product_id=${productId}`;
