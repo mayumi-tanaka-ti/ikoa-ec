@@ -100,6 +100,7 @@ async function handlePurchase(e) {
         document.getElementById('result').textContent = '購入が完了しました。';
         setTimeout(() => { window.location.href = 'complete.html'; }, 1500);
     } else {
-        document.getElementById('result').textContent = data.message || 'エラーが発生しました';
+        // エラー詳細も表示
+        document.getElementById('result').textContent = (data.message || data.error || 'エラーが発生しました') + (data.details ? '\n' + data.details : '');
     }
 }
