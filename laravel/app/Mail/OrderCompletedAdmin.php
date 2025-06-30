@@ -25,32 +25,16 @@ class OrderCompletedAdmin extends Mailable
     }
 
     /**
-     * Get the message envelope.
+     * Build the message.
      */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: '新規注文がありました',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'emails.order_completed_admin',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        return $this->subject('新規注文がありました')
+            ->view('emails.order_completed_admin')
+            ->with([
+                'userName' => $this->userName,
+                'orderItems' => $this->orderItems,
+                'total' => $this->total,
+            ]);
     }
 }
