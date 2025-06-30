@@ -99,12 +99,12 @@ class CartController extends Controller
     public function destroy(string $id)
     {
         $userId = Auth::id(); // ← 実際のログインユーザーIDを取得
-        $cart = Cart::where('user_id', $user_id)->get();
+        $cart = Cart::where('user_id', $userId)->first();
 
         // IDでカート商品を検索し、所有者チェック
         $cartProduct = CartProduct::where('product_id', $id)
             ->where('cart_id', $cart->id)
-            ->firstOrFail();
+            ->first();
 
         $cartProduct->delete();
 
