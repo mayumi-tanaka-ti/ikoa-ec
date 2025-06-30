@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 購入ボタンで遷移
   purchaseBtn.addEventListener('click', () => {
-    window.location.href = 'ikoa/cart/purchase.html';
+    window.location.href = '/ikoa/cart/purchase.html';
   });
 
   // 初回読み込み
