@@ -1,0 +1,39 @@
+body { font-family: sans-serif; background: #f8f8f8; }
+        .container { max-width: 800px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+        h1 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 2em; }
+        th, td { border: 1px solid #ccc; padding: 0.7em; text-align: left; }
+        th { background: #f0f0f0; }
+        tr:nth-child(even) { background: #fafafa; }
+        .review-link { display: inline-block; margin-left: 1em; color: #007bff; text-decoration: underline; cursor: pointer; }
+        .review-link:hover { color: #0056b3; }
+        .to-create { display: block; margin: 1.5em 0; text-align: right; }
+        .to-create a { color: #fff; background: #007bff; padding: 0.5em 1em; border-radius: 4px; text-decoration: none; }
+        .to-create a:hover { background: #0056b3; }
+        @media (max-width: 600px) {
+          .container { padding: 1em; }
+          table, th, td { font-size: 0.95em; }
+        }
+
+        tbody tr td[colspan] {
+          text-align: center;
+          color: #888;
+          background: #f9f9f9;
+        }
+
+        th, td {
+          transition: background 0.2s;
+        }
+
+        tr:hover td {
+          background: #e3f2fd;
+        }
+
+        .review-link {
+          font-weight: bold;
+          border-bottom: 1px dashed #007bff;
+        }
+
+        .review-link:active {
+          color: #003366;
+        }

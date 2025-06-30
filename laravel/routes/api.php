@@ -27,7 +27,8 @@ Route::middleware(['auth:sanctum','can:admin'])->group(function () {
     Route::get('admin/history/{id}', [AdminController::class,'history']);
     Route::apiResource('admin/users', AdminController::class);
     Route::get('admin/user/{id}', [AdminController::class, 'show']);
-    Route::apiResource('admin/orders', OrderController::class);
+    Route::get('/admin/orders/monthly', [OrderController::class, 'monthlySales']);
+    Route::get('/admin/orders/daily', [OrderController::class, 'dailySales']);
 });
 
 //ユーザー側-----
