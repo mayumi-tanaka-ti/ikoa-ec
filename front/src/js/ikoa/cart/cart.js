@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         itemDiv.innerHTML = `
           <p>
             <strong>${item.product_name}</strong> - ${item.price}円 × 
-            <input type="number" min="1" value="${item.quantity}" data-id="${item.id}" class="qty-input">
+            <input type="number" min="1" value="${item.quantity}" data-id="${item.product_id}" class="qty-input">
             = ${subtotal}円
-            <button data-id="${item.id}" class="delete-btn">削除</button>
+            <button data-id="${item.product_id}" class="delete-btn">削除</button>
           </p>
         `;
         cartItemsDiv.appendChild(itemDiv);
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             headers: {
               'Accept': 'application/json',
               'Authorization': `Bearer ${token}`,
-            },
+            }
           });
 
           if (!res.ok) throw new Error('削除に失敗しました');
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 購入ボタンで遷移
   purchaseBtn.addEventListener('click', () => {
-    window.location.href = 'ikoa/cart/purchase.html';
+    window.location.href = '/ikoa/cart/purchase.html';
   });
 
   // 初回読み込み
