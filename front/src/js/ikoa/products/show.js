@@ -44,11 +44,12 @@ async function loadProductDetail(id) {
 
 function renderProductDetail(product) {
     const detailContainer = document.getElementById('product-show');
-    
+    const imageUrl = `http://localhost:8000/storage/${product.image_path}`;
     const productHTML = `
         <div class="product-header">
             <div class="product-image">
-                <img src="${product.image || '/images/no-image.png'}" alt="${product.name}">
+                // <img src="${product.image || '/images/no-image.png'}" alt="${product.name}">
+                <img src="${imageUrl}" height: auto;">
             </div>
             <div class="product-info">
                 <h1 class="product-title">${escapeHtml(product.name)}</h1>

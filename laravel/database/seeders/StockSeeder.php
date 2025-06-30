@@ -2,30 +2,38 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class StockSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        DB::table('stocks')->insert([
-            [
-                'product_id' => 1,
-                'change_quantity' => -1,
-                'reason' => '購入による出庫',
-                'stock_quantity' => 14,
-            ],
-            [
-                'product_id' => 3,
-                'change_quantity' => 5,
-                'reason' => '仕入れによる入庫',
-                'stock_quantity' =>  35,
-            ],
-        ]);
+        $faker = Faker::create('ja_JP');
+        $products = DB::table('products')->get();
+
+        foreach ($products as $product) {
+            $isIncoming = rand(0, 1); // 入庫 or 出庫
+            $change = rand(1, 20);
+            $changeQuantity = $isIncoming ? $change : -$change;
+            $reason = $isIncoming ? '仕入れによる入庫' : '購入による出庫';
+
+            $currentStock = DB::table('products')->where('id', $product->id)->value('stock') ?? 0;
+            $newStock = max(0, $currentStock + $changeQuantity);
+
+            DB::table('stocks')->insert([
+                'product_id' => $product->id,
+                'change_quantity' => $changeQuantity,
+                'reason' => $reason,
+                'stock_quantity' => $newStock,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // productテーブルの在庫も更新（任意）
+            DB::table('products')->where('id', $product->id)->update(['stock' => $newStock]);
+        }
     }
 }
+

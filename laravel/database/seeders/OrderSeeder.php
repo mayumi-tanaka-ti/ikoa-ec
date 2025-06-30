@@ -7,25 +7,26 @@ use Illuminate\Database\Seeder;
 use App\Models\Order;
 use App\Models\User;
 
+
 class OrderSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        User::factory()
-            ->count(200)
-            ->state([
-                'is_admin' => false,
-            ])
-            ->create()
-            ->each(function ($user) {
-                // 各ユーザーに1～5件の注文を作成
-                $orderCount = rand(1, 5);
-                Order::factory()->count($orderCount)->create([
+        $users = User::where('is_admin', false)->get();
+
+        foreach ($users as $user) {
+            $orderCount = rand(1, 3);
+
+            for ($i = 0; $i < $orderCount; $i++) {
+                Order::factory()->create([
                     'user_id' => $user->id,
+                    'shipping_address' => $user->address ?? fake('ja_JP')->address(),
+                    'shipping_postal_code' => fake('ja_JP')->postcode(),
+                    'recipient_name' => $user->name,
+                    'recipient_phone' => fake('ja_JP')->phoneNumber(),
                 ]);
-            });
+            }
+        }
     }
 }
+
