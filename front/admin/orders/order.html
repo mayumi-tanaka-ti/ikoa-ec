@@ -4,17 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>売上一覧</title>
+  <link rel="stylesheet" href="/src/css/admin/style.css">
 </head>
 <body>
   <h1>売上一覧画面</h1>
 
-  <div id="message" style="color: red;"></div>
+  <div id="message" class="message"></div>
 
-  <h2>月別売上</h2>
-  <div id="monthly-sales"></div>
+  <section class="sales-section">
+    <h2>📅 月別売上</h2>
+    <div id="monthly-sales" class="sales-box"></div>
+  </section>
 
-  <h2>日別売上</h2>
-  <div id="daily-sales"></div>
+  <section class="sales-section">
+    <h2>📆 日別売上</h2>
+    <div id="daily-sales" class="sales-box"></div>
+  </section>
 
   <script type="module" src="../../src/js/admin/orders/orders.js"></script>
 </body>

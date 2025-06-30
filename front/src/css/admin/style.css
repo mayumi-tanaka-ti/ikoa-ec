@@ -1,4 +1,171 @@
-body { font-family: sans-serif; margin: 40px; }
-.nav { display: flex; gap: 2rem; }
-.nav a { padding: 1rem 2rem; background: #1976d2; color: #fff; border-radius: 6px; text-decoration: none; font-size: 1.2rem; transition: background 0.2s; }
-.nav a:hover { background: #1565c0; }
+/* 全体のリセットとフォント設定 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* 見出し */
+h1 {
+  margin-top: 60px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* フォーム全体のスタイル */
+form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  margin-top: 20px;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+/* ラベルと入力欄 */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #4A90E2;
+  outline: none;
+}
+
+/* ボタン */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #357ABD;
+}
+
+/* メッセージ表示 */
+#message {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  height: 20px;
+}
+
+/* ログアウトセクション */
+#logoutSection {
+  margin-top: 30px;
+  background-color: #e0f7fa;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 300px;
+  text-align: center;
+}
+
+#logoutSection h2 {
+  color: #00796B;
+}
+
+#logoutSection button {
+  margin-top: 10px;
+}
+/* 管理者画面のナビゲーション */
+.admin-nav {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ナビゲーションリンク */
+.admin-nav a {
+  display: inline-block;
+  width: 220px;
+  padding: 12px 20px;
+  text-align: center;
+  background-color: #4A90E2;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.admin-nav a:hover {
+  background-color: #357ABD;
+  transform: translateY(-2px);
+}
+
+/* 見出しスタイル統一 */
+h1 {
+  margin-top: 40px;
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+}
+
+h2 {
+  color: #4A90E2;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+/* メッセージ表示用 */
+.message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+/* セクションの基本スタイル */
+.sales-section {
+  background-color: #fff;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 売上データ表示枠 */
+.sales-box {
+  background-color: #f1f5fb;
+  padding: 15px;
+  border-radius: 8px;
+  min-height: 80px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #333;
+}
