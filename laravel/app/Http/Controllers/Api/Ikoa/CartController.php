@@ -12,6 +12,10 @@ use App\Http\Resources\CartResource;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\CartOrderResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderCompletedUser;
+use App\Mail\OrderCompletedAdmin;
+use App\Models\User;
 
 class CartController extends Controller
 {
@@ -160,6 +164,22 @@ class CartController extends Controller
                     'price' => $item->product->price,
                 ]);
             }
+
+            // メール送信処理
+            $user = User::find(Auth::id());
+            $userName = $user->name;
+            $orderItems = $cartItems->map(function($item) {
+                return [
+                    'name' => $item->product->name,
+                    'quantity' => $item->quantity
+                ];
+            })->toArray();
+
+            // ユーザーへ
+            Mail::to($user->email)->send(new OrderCompletedUser($userName, $orderItems, $totalPrice));
+            // 管理者へ
+            $adminMail = config('mail.admin_address', 'admin@example.com');
+            Mail::to($adminMail)->send(new OrderCompletedAdmin($userName, $orderItems, $totalPrice));
 
             $cart->cartProducts()->delete();
 
