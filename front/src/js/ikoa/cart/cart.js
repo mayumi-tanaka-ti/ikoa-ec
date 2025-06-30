@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         try {
-          const res = await fetch(`http://localhost:8000/api/carts/${cartProductId}`, {
+          const res = await fetch(`http://localhost:8000/api/cart/${cartProductId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!confirm('本当に削除しますか？')) return;
 
         try {
-          const res = await fetch(`http://localhost:8000/api/carts/${cartProductId}`, {
+          const res = await fetch(`http://localhost:8000/api/cart/${cartProductId}`, {
             method: 'DELETE',
             headers: {
               'Accept': 'application/json',
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // 購入ボタンで遷移
   purchaseBtn.addEventListener('click', () => {
-    window.location.href = '/ikoa/cart/purchase.html';
+    window.location.href = 'ikoa/cart/purchase.html';
   });
 
   // 初回読み込み
